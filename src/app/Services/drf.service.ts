@@ -13,7 +13,7 @@ const httpOptions = {
 
 
 export class DRFService {
-  private BASE_URL = 'http://localhost:8000/ws/';
+  private BASE_URL = 'http://localhost:8000/';
   constructor(private http: HttpClient) {
 
   }
