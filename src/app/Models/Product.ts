@@ -1,6 +1,7 @@
 import {Promotion} from "./Promotion";
 
 export class Product {
+  id: number | null;
   name: string;
   price: number;
   description: string;
@@ -14,7 +15,8 @@ export class Product {
   date: Date;
   condition: string;
 
-  constructor(name: string, price: number, description: string, image: File, quantity: number, brand: string, seller: string, category: string, promotion: Promotion, condition: string) {
+  constructor(id: number | null, name: string, price: number, description: string, image: File, quantity: number, brand: string, seller: string, category: string, promotion: Promotion, condition: string) {
+    this.id = id;
     this.name = name;
     this.price = price;
     this.description = description;

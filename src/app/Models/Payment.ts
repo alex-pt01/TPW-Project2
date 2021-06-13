@@ -2,6 +2,7 @@ import {PaymentMethod} from "./PaymentMethod";
 import {ShoppingCart} from "./ShoppingCart";
 
 export class Payment{
+  id: number | null;
   address: string;
   total: number;
   date: Date;
@@ -10,7 +11,7 @@ export class Payment{
   usedCredits: number;
   username: string;
 
-  constructor(address: string, total: number, method: PaymentMethod, shopping_cart: ShoppingCart, usedCredits: number = 0, username: string = "TechOn") {
+  constructor(id: number | null, address: string, total: number, method: PaymentMethod, shopping_cart: ShoppingCart, usedCredits: number = 0, username: string = "TechOn") {
     this.address = address;
     this.total = total;
     this.method = method;
@@ -18,5 +19,6 @@ export class Payment{
     this.usedCredits = usedCredits;
     this.username = username;
     this.date = new Date();
+    this.id = id;
   }
 }
