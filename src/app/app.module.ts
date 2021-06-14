@@ -9,11 +9,13 @@ import { SearchComponent } from './search/search.component';
 import { AppRoutingModule } from './app-routing.module';
 import {RouterModule} from "@angular/router";
 import {DRFService} from "./Services/drf.service";
+import { ProductDetailsComponent } from './product-details/product-details.component';
 @NgModule({
   declarations: [
     AppComponent,
     SearchComponent,
     ProfileComponent,
+    ProductDetailsComponent,
   ],
   imports: [
     BrowserModule,

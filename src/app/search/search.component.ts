@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Product} from "../Models/Product";
 import {DRFService} from "../Services/drf.service";
-import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-search',

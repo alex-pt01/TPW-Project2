@@ -3,12 +3,14 @@ import { CommonModule } from '@angular/common';
 import {RouterModule, Routes} from "@angular/router";
 import {SearchComponent} from "./search/search.component";
 import {ProfileComponent} from "./profile/profile.component";
+import {ProductDetailsComponent} from "./product-details/product-details.component";
 
 
 
 const routes: Routes = [
   {path: 'shop', component: SearchComponent},
   {path: 'account', component: ProfileComponent},
+  {path: 'details/:id', component: ProductDetailsComponent},
 
 ];
 

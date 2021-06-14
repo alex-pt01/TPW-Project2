@@ -1,3 +1,5 @@
+import {Product} from "./Product";
+
 export class Promotion {
   id: number | null;
   name: string;
@@ -10,5 +12,9 @@ export class Promotion {
     this.id=id;
     this.discount = discount;
     this.description = description;
+  }
+
+  static newPromotion(): Promotion{
+    return new Promotion(-99,'',0,'');
   }
 }
