@@ -103,9 +103,10 @@
     <div class="features_items">
       <h2 class="title text-center">Features Items {{products.length}} </h2>
       <div class="container"  *ngFor="let product of products" >
+        <a routerLink="details/{{product.id}}">
         <div class="card">
           <div class="imgBx">
-            <img src="http://localhost:8000{{ product.image }}">
+            <img src="{{ product.image }}">
           </div>
           <div class="contentBx">
             <h3 style="color: black">{{product.name}}</h3>
@@ -121,6 +122,7 @@
 
           </div>
         </div>
+        </a>
       </div>
 
 
