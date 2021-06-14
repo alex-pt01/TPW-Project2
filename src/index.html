@@ -4,10 +4,66 @@
   <meta charset="utf-8">
   <title>TPWProject2</title>
   <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 <body>
+
+  <div style="background-color: #2a6496; height:80px; padding-top: 40px" ><!--header-middle-->
+    <div class="container">
+
+      <div class="row" >
+        <div>
+          <div class="logo pull-left">
+            <a  > <span style="color: darkorange; font-size: 40px;"   >Tech</span><span style="color: whitesmoke; font-size: 40px;"   >On</span></a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div>
+    <div class="container " >
+      <div class="row">
+        <div class="col-sm-12">
+
+          <div class="navbar">
+            <a  >Home</a>
+            <a  >Products</a>
+            <a  >Cart</a>
+
+            <!--{% if user.is_authenticated %}-->
+            <div class="dropdown">
+              <button class="dropbtn" style="color: darkorange">Management
+                <i class="fa fa-caret-down"></i>
+              </button>
+              <div class="dropdown-content">
+                <a ><i class="fa fa-cog"></i>  Products </a>
+                <a  ><i class="fa fa-cog"></i> Promotions </a>
+                <a ><i class="fa fa-cog"></i> Users </a>
+                <a ><i class="fa fa-cog"></i> Comments </a>
+              </div>
+            </div>
+            <a href="" style="float:right"> Welcome, User</a>
+            <a style="float:right"><i class="icon-signout"></i>Logout </a>
+          </div>
+
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+<script>
+
+  $(function() {
+    setTimeout(function() { $("#hideDiv").fadeOut(1500); }, 1000)
+
+  })
+</script>
   <app-root></app-root>
 </body>
 </html>

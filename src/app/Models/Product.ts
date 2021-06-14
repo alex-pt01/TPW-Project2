@@ -1,12 +1,13 @@
 import {Promotion} from "./Promotion";
 
 export class Product {
+  private BASE_URL = 'http://localhost:8000/';
   id: number | null;
   name: string;
   price: number;
   description: string;
   stock: boolean;
-  image: File;
+  image: string;
   quantity: number;
   brand: string;
   seller: string;
@@ -20,7 +21,7 @@ export class Product {
     this.name = name;
     this.price = price;
     this.description = description;
-    this.image = image;
+    this.image = this.BASE_URL + image;
     this.quantity = quantity;
     this.brand = brand;
     this.seller = seller;

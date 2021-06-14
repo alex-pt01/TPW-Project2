@@ -1,7 +1,4 @@
 
-<p>search works!</p>
-
-
   <!--
   <div class="container">
     <div class="row">
@@ -92,22 +89,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </div>
 </div>
 
@@ -115,48 +96,37 @@
 -->
 
 
-
-      <!--SHOW PRODUCTS-->
+  <!--SHOW PRODUCTS-->
 
 <div class="col-sm-9 padding-right"> <br><br> <br><br>
     <div class="features_items">
       <h2 class="title text-center">Features Items {{products.length}} </h2>
-      <h1 *ngFor="let promo of promotions" >{{promo}}</h1>
-      <div *ngFor="let product of products" class="col-sm-4">
-
-        <a href="/details/{{ product.id }}" >
-          <div class="product-image-wrapper">
-            <div class="single-products">
-              <div class="productinfo text-center">
-                <!--<img src="{{ product.image }}" alt="" />-->
-                <h2>{{ product.price }} </h2>
-                <p>{{ product.name }}</p>
-                <p>({{ product.condition }}) by {{ product.seller }} </p>
-
-                <div  *ngIf="product.promotion!=null" style=" background-color:#FCD12A; text-align: center; position: absolute; left:205px; top:208px; font-size: 20px "> <strong style="color:black"> -{{ product.promotion.name }}</strong></div>
-
-
-
-              </div>
-              <!--
-              <div class="product-overlay" style="background-color: #2a6496">
-                <div class="overlay-content">
-                  <h2 *ngIf="product.promotion" style="text-decoration: line-through">{{ product.price }} €</h2>
-                  <h2>{{ product.promotion.discount }} €</h2>
-
-                  <h2 *ngIf="product.promotion == null">{{ product.price }} €</h2>
-
-
-                  <p>{{ product.name }}</p>
-                  <a *ngIf="product.quantity!=0" class="btn btn-default add-to-cart" href="/addToCart/{{ product.id }}" type="submit" ><i class="fa fa-shopping-cart"><span style="font-family: Roboto, sans-serif">Add To Cart</span></i></a>
-
-                  <a *ngIf="product.quantity==0"  class="btn btn-default add-to-cart disabled" href="" type="submit" >Not In Stock</a>
-                  </div>
-              </div>
--->
-            </div>
+      <div class="container"  *ngFor="let product of products" >
+        <div class="card">
+          <div class="imgBx">
+            <img src="http://localhost:8000{{ product.image }}">
           </div>
-        </a>
+          <div class="contentBx">
+            <h3 style="color: black">{{product.name}}</h3>
+            <p>({{ product.condition }}) by {{ product.seller }}</p>
+            <p>
+              <a class="price" *ngIf="product.promotion" style="text-decoration: line-through">{{ product.price }} €</a>
+              <a class="price" *ngIf="product.promotion">{{ product.promotion.discount }} €</a>
+              <a class="price" *ngIf="product.promotion == null">{{ product.price }} €</a>
+              <a *ngIf="product.quantity!=0" class="add-to-cart" type="submit" ><i class="fa fa-shopping-cart"><span class="add-to-cart" style="font-family: Roboto, sans-serif">Add To Cart</span></i></a>
+              <a *ngIf="product.quantity==0"   href="" type="submit" > <span class="not-in-stock">Not In Stock</span></a>
+            </p>
+
+
+          </div>
+        </div>
+      </div>
+
+
+
+        </div>
+
+
       </div>
 
         <!--<div class="pagination">
@@ -182,7 +152,6 @@
 
 </div>
 </div>-->
-</div>
 <!--
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 

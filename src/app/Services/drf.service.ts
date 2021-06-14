@@ -11,7 +11,6 @@ const httpOptions = {
   providedIn: 'root'
 })
 
-
 export class DRFService {
   private BASE_URL = 'http://localhost:8000/';
   constructor(private http: HttpClient) {
@@ -23,6 +22,7 @@ export class DRFService {
     const url = this.BASE_URL + 'product/' + id;
     return this.http.get<Product>(url);
   }
+
   getProducts(): Observable<Product[]>{
     const url = this.BASE_URL +'products';
     return this.http.get<Product[]>(url);
