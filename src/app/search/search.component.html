@@ -103,7 +103,7 @@
     <div class="features_items">
       <h2 class="title text-center">Features Items {{products.length}} </h2>
       <div class="container"  *ngFor="let product of products" >
-        <a routerLink="details/{{product.id}}">
+        <a routerLink="/details/{{product.id}}">
         <div class="card">
           <div class="imgBx">
             <img src="{{ product.image }}">
@@ -113,7 +113,7 @@
             <p>({{ product.condition }}) by {{ product.seller }}</p>
             <p>
               <a class="price" *ngIf="product.promotion" style="text-decoration: line-through">{{ product.price }} €</a>
-              <a class="price" *ngIf="product.promotion">{{ product.promotion.discount }} €</a>
+              <a class="price" *ngIf="product.promotion">{{ product.price- product.price*product.promotion.discount }} €</a>
               <a class="price" *ngIf="product.promotion == null">{{ product.price }} €</a>
               <a *ngIf="product.quantity!=0" class="add-to-cart" type="submit" ><i class="fa fa-shopping-cart"><span class="add-to-cart" style="font-family: Roboto, sans-serif">Add To Cart</span></i></a>
               <a *ngIf="product.quantity==0"   href="" type="submit" > <span class="not-in-stock">Not In Stock</span></a>

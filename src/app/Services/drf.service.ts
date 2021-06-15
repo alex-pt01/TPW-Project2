@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Product} from "../Models/Product";
 import {Observable} from "rxjs";
 import {Promotion} from "../Models/Promotion";
+import {Review} from "../Models/Comment";
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type':'application/json'})
@@ -57,5 +58,14 @@ export class DRFService {
     const url = this.BASE_URL +'promotiondel/'+promotion.id;
     return this.http.delete<Product>(url, httpOptions);
   }
+
+  //Promotions
+  getComments(productId: number): Observable<Review[]>{
+    const url = this.BASE_URL +'product/'+productId+"/comment/";
+    return this.http.get<Review[]>(url);
+  }
+
+
+
 
 }

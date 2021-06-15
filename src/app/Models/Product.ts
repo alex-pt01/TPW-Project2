@@ -16,7 +16,7 @@ export class Product {
   date: Date = new Date();
   condition: string = '';
 
-  constructor(id: number | null, name: string, price: number, description: string, image: string, quantity: number, brand: string, seller: string, category: string, condition: string, promotion: Promotion) {
+  constructor(id: number | null, name: string, price: number, description: string, image: string, quantity: number, brand: string, seller: string, category: string, condition: string, promotion: Promotion, date?: Date) {
     this.id = id;
     this.name = name;
     this.price = price;
@@ -28,7 +28,9 @@ export class Product {
     this.category = category;
     this.promotion = promotion;
     this.condition = condition;
-    this.date = new Date();
+    if (date){
+      this.date = date
+    }
     this.stock = quantity > 0;
   }
   static newProduct(): Product{
