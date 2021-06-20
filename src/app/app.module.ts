@@ -10,6 +10,13 @@ import { AppRoutingModule } from './app-routing.module';
 import {RouterModule} from "@angular/router";
 import {DRFService} from "./Services/drf.service";
 import { ProductDetailsComponent } from './product-details/product-details.component';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatOptionModule} from "@angular/material/core";
+import {MatSelectModule} from "@angular/material/select";
+import {MatCheckboxModule} from "@angular/material/checkbox";
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,9 +26,14 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
   ],
   imports: [
     BrowserModule,
-    FormsModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatFormFieldModule,
+    MatOptionModule,
+    ReactiveFormsModule,
+    MatSelectModule,
+    MatCheckboxModule,
 
   ],
   providers: [DRFService],

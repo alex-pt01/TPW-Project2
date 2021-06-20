@@ -1,106 +1,24 @@
 
 
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-3">
-        <div class="left-sidebar">
-          <div class="panel-group category-products" style="border-style: none;" id="accordian">
-          </div>
 
-          <!--SEARCH-->
-
-          <div class="panel-group search_box">
-            <form action="." method="POST">
-
-              <input name="searchBar"  style="height:30px; margin-lef:400px; border-radius: 10px;" type="search" placeholder="Search"/>
-              <div class=" category-products" style="border-style: none;" >
-                <button  style="float:right ; margin-top: -40px" type="submit" class="badge pull-right">Search</button>
-              </div>                </form>
-          </div>
+<div class="col-sm-9" style="float:left; margin:120px">
+      <!--SHOW PRODUCTS-->
+    {{filteredValues.get('categories')}}
+  <form [formGroup]="categoryForm" (ngSubmit)="submitForm('category')" novalidate>
+    <!-- Form elements goes here -->
+    <input type="submit" value="Submit">
+  </form>
+  <form [formGroup]="filterForm">
+    <input type="checkbox"  *ngFor="let c of categories" [value]="c" (change)="setCategory($event)">
+  </form>
 
 
-          <form method="POST" action="" >
-            <!--Price Range-->
-
-            <h2>Price Range</h2>
-
-            <div class="panel-group category-products" style="border-style: none;">
-
-              <input  style=" margin-left: 20px ;border-radius: 10px; border-top:none" name="minPrice" type="number" min="0" max="9990.99" step="0.50" placeholder="Min" /> ---
-              <input style="border-radius: 10px; border-top:none " name="maxPrice" type="number"  min="50" max="10000" step="0.50" placeholder="Max"  />
-
-            </div>
-
-
-            <!--CATEGORY AND PRODUCT BRANDS-->
-  <!--
-  <h2>Category ({{ totalCategories }})</h2>
-  {% for category, prodBrands in productsFilter.items %}
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-  <ul class="term-reference checkbox-container">
-
-    <div class="checkbox">
-      <div class="panel panel-default" style="width: 265px; margin-left: -60px">
-
-        <div class="panel-heading" >
-          <h4 class="panel-title">
-            <h4 class="control-label">
-              <input type="checkbox" class="form-checkbox checkbox-parent" name="categories" value="{{ category }}">{{ category }}
-            </h4>
-          </h4>
-
-        </div>
-
-
-        <ul class="panel-body">
-          <li>
-            {%  for prodBrand in prodBrands %}
-            <div class="checkbox">
-              <label class="control-label">
-                <input  type="checkbox" class="form-checkbox checkbox-child" name="brandsCategories" value="{{ prodBrand }}">{{ prodBrand}}
-              </label>
-            </div>
-            {% endfor %}
-          </li>
-        </ul>
-      </div>
-    </div>
-  </ul>
-
-  {% endfor %}
-  <strong>Stock </strong>      <input type="checkbox" name="stockCheck" >
-  <strong style="margin-left: 120px">Promotion </strong>    <input type="checkbox" name="promotionCheck" >
-  <strong>New </strong>      <input type="checkbox" name="newCheck" >
-  <strong style="margin-left: 128px">Used </strong>    <input type="checkbox" name="usedCheck" >
-
-  <br><br>
-  <strong style="color: orange; font-size: 20px">Seller(s)</strong>
-  <br><br>
-  {%  for seller in sellers %}
-  <p><input  type="checkbox" class="form-checkbox checkbox-child" name="sellers" value="{{ seller }}">{{ seller}}</p>
-  {% endfor %}
-
-
-  <div class=" category-products" style="border-style: none;" >
-    <button  style="float:right" type="submit" class="badge pull-right">Search</button>
-  </div>
-</form>
-
-
--->
-          </form>
 
 </div>
-</div>
-
-<br><br><br>
+<div class="col-sm-9 padding-right">
 
 
-
-  <!--SHOW PRODUCTS-->
-
-<div class="col-sm-9 padding-right"> <br><br> <br><br>
-    <div class="features_items">
+  <div class="features_items">
       <h2 class="title text-center">Features Items {{products.length}} </h2>
       <div class="container"  *ngFor="let product of products" >
         <a routerLink="/details/{{product.id}}">
@@ -186,6 +104,5 @@
   </div>
 
 </footer>-->
-        </div>
-      </div>
+
 <router-outlet></router-outlet>

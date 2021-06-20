@@ -41,6 +41,11 @@ export class DRFService {
     return this.http.delete<Product>(url, httpOptions);
   }
 
+  search(filters: Map<String, any>): Observable<Product[]>{
+    const url = this.BASE_URL +'search';
+    return this.http.post<Product[]>(url, filters, httpOptions);
+  }
+
   //Promotions
   getPromotions(): Observable<Promotion[]>{
     const url = this.BASE_URL +'promotions';
@@ -64,6 +69,7 @@ export class DRFService {
     const url = this.BASE_URL +'product/'+productId+"/comment/";
     return this.http.get<Review[]>(url);
   }
+
 
 
 

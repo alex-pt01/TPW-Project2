@@ -1,6 +1,7 @@
 import {Promotion} from "./Promotion";
 
 export class Product {
+  static CONDITIONS = ["New","Used"]
   private BASE_URL = 'http://localhost:8000/';
   id: number | null;
   name: string;
