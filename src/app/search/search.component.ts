@@ -21,40 +21,48 @@ export class SearchComponent implements OnInit {
 
   categoryForm= new FormGroup({});
 
-  categories = ["All"];
-  sellers = ["All"];
-  condition = ["All", "New", "Used"];
-  query = '';
-  brands = ["All"];
-  priceRange =[0,20000];
-  inStock = "";
-  inPromotion="";
-  currentSelected = '-----------';
-  constructor(private service: DRFService, private fb: FormBuilder) {
-    this.filteredValues.set('query',this.query);
-    this.filteredValues.set('condition', this.condition)
-    this.filteredValues.set('categories', this.categories)
-    this.filteredValues.set('brands', this.brands)
-    this.filteredValues.set('sellers', this.sellers)
-    this.filteredValues.set('price', this.priceRange)
-    this.filteredValues.set('inStock', this.inStock)
-    this.filteredValues.set('inPromotion', this.inPromotion)
+  CATEGORIES = Array<string>("All");
+  SELLERS = Array<string>("All");
+  CONDITIONS = ["All","New", "Used"];
+  BRANDS = Array<string>("All");
+  STOCK = ["True", "False", "All"]
+  PROMO = ["True", "False", "All"]
 
-    this.categoryForm = this.fb.group({
-      category: this.fb.array([])
-    });
+  condition="All";
+  category = "All";
+  brand="All";
+  seller="All";
+  query = "All";
+  priceRange =[0,20000];
+  inStock = "All";
+  inPromotion="All";
+
+
+  constructor(private service: DRFService) {
   }
 
   ngOnInit(): void {
     this.getProducts();
+
+
+  }
+  search(value: string){
+    this.category = value;
+    this.searchRemoveAll();
   }
 
+
+
   searchRemoveAll(): void {
-    let filters = this.filteredValues;
-    filters.set("category",  (<[]>this.filteredValues.get('categories')).filter(obj => obj !== "All"))
-    filters.set("sellers",  (<[]>this.filteredValues.get('sellers')).filter(obj => obj !== "All"))
-    filters.set("condition",  (<[]>this.filteredValues.get('condition')).filter(obj => obj !== "All"))
-    filters.set("brands",  (<[]>this.filteredValues.get('brands')).filter(obj => obj !== "All"))
+    let filters = new Map();
+    filters.set('query',this.query);
+    filters.set('brands', this.brand)
+    filters.set('price', this.priceRange)
+    filters.set('categories', this.category)
+    filters.set('sellers', this.seller)
+    filters.set('condition', this.condition)
+    filters.set('inStock', this.inStock)
+    filters.set('inPromotion', this.inPromotion)
     this.service.search(filters).subscribe((pr: Product[])=>
     {
       this.products = pr;
@@ -81,13 +89,11 @@ export class SearchComponent implements OnInit {
     let minPrice = 0
     this.allProducts.forEach((value) =>{
         if (value.price>minPrice) minPrice = value.price;
-        if (!this.sellers.includes(value.seller)) {this.sellers.push(value.seller)}
-        if (!this.categories.includes(value.category)) {this.categories.push(value.category)}
-        if (!this.brands.includes(value.brand)) {this.brands.push(value.brand)}
-
+        if (!this.SELLERS.includes(value.seller)) {this.SELLERS.push(value.seller)}
+        if (!this.CATEGORIES.includes(value.category)) {this.CATEGORIES.push(value.category)}
+        if (!this.BRANDS.includes(value.brand)) {this.BRANDS.push(value.brand)}
     })
     this.priceRange = [0, minPrice];
-
   }
 
 }

@@ -13,7 +13,7 @@ const httpOptions = {
 })
 
 export class DRFService {
-  private BASE_URL = 'http://localhost:8000/';
+  private BASE_URL = 'https://pedromarques27.pythonanywhere.com/';
   constructor(private http: HttpClient) {
 
   }
@@ -42,8 +42,18 @@ export class DRFService {
   }
 
   search(filters: Map<String, any>): Observable<Product[]>{
+    let f  = {
+      query: filters.get("query"),
+      price: filters.get("price"),
+      category: filters.get("categories"),
+      seller: filters.get("sellers"),
+      brand: filters.get("brands"),
+      condition: filters.get("condition"),
+      inStock: filters.get("inStock"),
+      inPromotion: filters.get("inPromotion"),
+    }
     const url = this.BASE_URL +'search';
-    return this.http.post<Product[]>(url, filters, httpOptions);
+    return this.http.post<Product[]>(url, f, httpOptions);
   }
 
   //Promotions

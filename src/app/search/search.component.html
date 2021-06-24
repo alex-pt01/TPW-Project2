@@ -1,16 +1,66 @@
 
 
 
-<div class="col-sm-9" style="float:left; margin:120px">
+<div class="col-sm-4" style="float:left; margin:120px">
       <!--SHOW PRODUCTS-->
-    {{filteredValues.get('categories')}}
-  <form [formGroup]="categoryForm" (ngSubmit)="submitForm('category')" novalidate>
-    <!-- Form elements goes here -->
-    <input type="submit" value="Submit">
-  </form>
-  <form [formGroup]="filterForm">
-    <input type="checkbox"  *ngFor="let c of categories" [value]="c" (change)="setCategory($event)">
-  </form>
+      <p><mat-form-field appearance="fill">
+        <mat-label>Category</mat-label>
+        <mat-select  [(value)]="category" (selectionChange)="searchRemoveAll()">
+          <mat-option *ngFor="let c of CATEGORIES" [value]="c">
+            {{c}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field></p>
+
+  <p><mat-form-field appearance="fill">
+    <mat-label>Brand</mat-label>
+    <mat-select  [(value)]="brand" (selectionChange)="searchRemoveAll()">
+      <mat-option *ngFor="let c of BRANDS" [value]="c">
+        {{c}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field></p>
+
+  <p><mat-form-field appearance="fill">
+    <mat-label>Seller</mat-label>
+    <mat-select  [(value)]="seller" (selectionChange)="searchRemoveAll()">
+      <mat-option *ngFor="let c of SELLERS" [value]="c">
+        {{c}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field></p>
+  <p><mat-form-field appearance="fill">
+    <mat-label>Condition</mat-label>
+    <mat-select  [(value)]="condition" (selectionChange)="searchRemoveAll()">
+      <mat-option *ngFor="let c of CONDITIONS" [value]="c">
+        {{c}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field></p>
+  <p>
+    <mat-form-field appearance="fill">
+      <mat-label>In Stock?</mat-label>
+      <mat-select  [(value)]="inStock" (selectionChange)="searchRemoveAll()">
+        <mat-option *ngFor="let c of STOCK" [value]="c">
+          {{c}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field appearance="fill">
+      <mat-label>Discount?</mat-label>
+      <mat-select  [(value)]="inPromotion" (selectionChange)="searchRemoveAll()">
+        <mat-option *ngFor="let c of PROMO" [value]="c">
+          {{c}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </p>
+
+
+
+
 
 
 
