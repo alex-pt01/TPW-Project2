@@ -25,14 +25,15 @@ export class SearchComponent implements OnInit {
   SELLERS = Array<string>("All");
   CONDITIONS = ["All","New", "Used"];
   BRANDS = Array<string>("All");
-  STOCK = ["True", "False", "All"]
-  PROMO = ["True", "False", "All"]
+  STOCK = ["True", "False", "All"];
+  PROMO = ["True", "False", "All"];
+  ITEMS = Array<string>("");
 
   condition="All";
   category = "All";
   brand="All";
   seller="All";
-  query = "All";
+  query = new FormControl("");
   priceRange =[0,20000];
   inStock = "All";
   inPromotion="All";
@@ -55,7 +56,7 @@ export class SearchComponent implements OnInit {
 
   searchRemoveAll(): void {
     let filters = new Map();
-    filters.set('query',this.query);
+    filters.set('query',this.query.value);
     filters.set('brands', this.brand)
     filters.set('price', this.priceRange)
     filters.set('categories', this.category)
@@ -92,6 +93,7 @@ export class SearchComponent implements OnInit {
         if (!this.SELLERS.includes(value.seller)) {this.SELLERS.push(value.seller)}
         if (!this.CATEGORIES.includes(value.category)) {this.CATEGORIES.push(value.category)}
         if (!this.BRANDS.includes(value.brand)) {this.BRANDS.push(value.brand)}
+        if (!this.ITEMS.includes(value.name)){this.ITEMS.push(value.name)}
     })
     this.priceRange = [0, minPrice];
   }

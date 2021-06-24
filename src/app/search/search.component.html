@@ -3,6 +3,13 @@
 
 <div class="col-sm-4" style="float:left; margin:120px">
       <!--SHOW PRODUCTS-->
+
+      <form class="example-form" (ngSubmit)="searchRemoveAll()">
+
+        <input id="name" type="text" [formControl]="query">
+        <input type="submit">
+    </form>
+  <hr/>
       <p><mat-form-field appearance="fill">
         <mat-label>Category</mat-label>
         <mat-select  [(value)]="category" (selectionChange)="searchRemoveAll()">
@@ -100,59 +107,6 @@
 
       </div>
 
-        <!--<div class="pagination">
 
-    <span class="step-links">
-        {% if productsList.has_previous %}
-            <a href="?page=1">&laquo; first</a>
-            <a href="?page={{ productsList.previous_page_number }}">previous</a>
-      {% endif %}
-
-        <span class="current">
-            Page {{ productsList.number }} of {{ productsList.paginator.num_pages }}.
-        </span>
-
-      {% if productsList.has_next %}
-            <a href="?page={{ productsList.next_page_number }}">next</a>
-            <a href="?page={{ productsList.paginator.num_pages }}">last &raquo;</a>
-      {% endif %}
-    </span>
-    -->
-  <!--    </div>
-  </div>
-
-</div>
-</div>-->
-<!--
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-
-<script>
-
-  $(document).ready(function(){
-    $('.checkbox-child').on('click', function() {
-      var $childCheckbox = $(this);
-      if ($childCheckbox.is(":checked")){
-        $childCheckbox
-          .closest('.checkbox-container')
-          .find('.checkbox-parent')
-          .prop("checked", true);
-      }
-    });
-  });
-</script>
-<br><br>
-<br><br>
-<footer id="footer">--><!--Footer-->
-<!--
-  <div class="footer-bottom">
-    <div class="container">
-      <div class="row">
-        <p class="pull-left">Copyright © 2021 TechOn . All rights reserved.</p>
-        <p class="pull-right">TPW Project</p>
-      </div>
-    </div>
-  </div>
-
-</footer>-->
 
 <router-outlet></router-outlet>

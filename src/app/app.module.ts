@@ -16,6 +16,9 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatOptionModule} from "@angular/material/core";
 import {MatSelectModule} from "@angular/material/select";
 import {MatCheckboxModule} from "@angular/material/checkbox";
+import {MatAutocomplete} from "@angular/material/autocomplete";
+import { LoginComponent } from './login/login.component';
+import {CartService} from "./Services/cart.service";
 
 @NgModule({
   declarations: [
@@ -23,6 +26,7 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
     SearchComponent,
     ProfileComponent,
     ProductDetailsComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,9 +38,10 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
     ReactiveFormsModule,
     MatSelectModule,
     MatCheckboxModule,
+    FormsModule,
 
   ],
-  providers: [DRFService],
+  providers: [DRFService, CartService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

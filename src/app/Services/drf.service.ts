@@ -14,6 +14,7 @@ const httpOptions = {
 
 export class DRFService {
   private BASE_URL = 'https://pedromarques27.pythonanywhere.com/';
+  private authToken = "";
   constructor(private http: HttpClient) {
 
   }
