@@ -5,6 +5,16 @@ import {Product} from "../Models/Product";
   providedIn: 'root'
 })
 export class CartService {
-  ITEMS = Array<Product>();
+  ITEMS = new Map<Product, number>();
   constructor() { }
+
+
+  addItem(product: Product, quantity: number):void{
+    this.ITEMS.set(product, quantity);
+  }
+  removeItem(product: Product): void{
+    this.ITEMS.delete(product);
+  }
+
+
 }

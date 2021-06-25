@@ -4,6 +4,7 @@ import {Product} from "../Models/Product";
 import {Observable} from "rxjs";
 import {Promotion} from "../Models/Promotion";
 import {Review} from "../Models/Comment";
+import {User} from "../Models/User";
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type':'application/json'})
@@ -14,9 +15,14 @@ const httpOptions = {
 
 export class DRFService {
   private BASE_URL = 'https://pedromarques27.pythonanywhere.com/';
-  private authToken = "";
+  public user: User | null;
   constructor(private http: HttpClient) {
+    this.user = null;
+  }
 
+  login(inUser:string, inPass:string): Observable<User>{
+    const url = this.BASE_URL + 'login';
+    return this.http.post<User>(url, {username: inUser, password:inPass}, httpOptions)
   }
 
   //Products

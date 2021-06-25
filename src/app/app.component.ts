@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import {DRFService} from "./Services/drf.service";
+import {User} from "./Models/User";
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'TPW-Project2';
+  constructor(private drfService: DRFService) {
+
+  }
 }

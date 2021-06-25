@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
+import {DRFService} from "../Services/drf.service";
+import {Product} from "../Models/Product";
+import {User} from "../Models/User";
+import {Router, RouterModule} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -7,20 +11,30 @@ import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  loginForm = new FormGroup({
-    username: new FormControl(),
-    password: new FormControl()
-  });
+
+  username= new FormControl('');
+  password= new FormControl('');
 
 
 
-  constructor(fb: FormBuilder ) {}
+
+  constructor(private drf: DRFService, fb: FormBuilder, private router: Router) {
+
+  }
 
 
   ngOnInit(): void {
   }
 
   login(): void{
+    if (this.username.value && this.password.value){
+      this.drf.login(this.username.value, this.password.value).subscribe((u: User)=> {
+        this.drf.user = u;
+        this.router.navigate(['/shop']);
+      });
+    }
+
+
 
   }
 

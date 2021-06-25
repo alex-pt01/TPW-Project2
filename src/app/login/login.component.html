@@ -1,17 +1,17 @@
 
 <div    style="  margin:auto;
-                      width:20%;
+                      width:50%;
                       padding:63px;
                      ">
-  <div class="login-form"><!--login form-->
+  <div class="login-form"  ><!--login form-->
     <h2>Login to your account</h2>
-    <form [formGroup]="loginForm">
-      <input [formControlName]="username" type="text" placeholder="Username" />
-      <input [formControlName]="password" name="pass" type="password" placeholder="Password" />
+    <form >
+      <input [formControl]="username" type="text" placeholder="Username" />
+      <input [formControl]="password" name="pass" type="password" placeholder="Password" />
       <span style="float:left;"> Don't have an account?</span>
-      <span><a style="float:right;"  > Signup </a> </span>
 
-      <button style="float:right;" type="submit" class="btn btn-default">Login</button>
+
+      <button style="float:right;" (click)="login()" type="submit" class="btn btn-default" value="Login">Login</button>
 
     </form>
   </div><!--/login form-->
