@@ -1,0 +1,83 @@
+
+
+<div class="container">
+  <h1 style="font-weight:300">Cart</h1>
+  <div class="cart-table">
+
+    <div class="row cart-row" *ngFor="let item of cart | keyvalue">
+
+
+
+
+        <td class="cart_quantity">
+          <div class="cart_quantity_button">
+
+            <a class="cart_quantity_up" > + </a>
+
+            <input class="cart_quantity_input" type="text" name="quantity" value="{{ item.key }}" autocomplete="off" size="2"/>
+
+            <a class="cart_quantity_down"> - </a>
+
+          </div>
+        </td>
+        <td class="cart_total">
+          <p class="cart_total_price">{{ item.key.price }}€</p>
+        </td>
+        <td class="cart_delete">
+          <a class="cart_quantity_delete"  type="submit" ><i class="fa fa-times"></i></a>
+        </td>
+
+
+      <div class="col-xs-12 col-md-2">
+        <img src="{{ item.key.image }}" width="100%">
+      </div>
+      <div class="col-md-6">
+        <div class="product-articlenr">#{{ item.key.id }}</div>
+        <div class="product-name">{{ item.key.name }}</div>
+        <div class="product-options"><span>Color:</span> Grey<br><span>Size:</span> M</div>
+        <div class="product-price">
+          <input type="text" name="quantity[4]" value="{{ item.value }}" size="1" class="form-control">
+          <button type="submit" data-toggle="tooltip" title="Uppdatera" class="update"><i class="fas fa-sync"></i></button>
+          <div class="product-price"><small>x</small> {{ item.key.price }}€</div>
+        </div>
+      </div>
+      <div class="col-md-3 cart-actions">
+        <div class="product-price-total">{{ item.key.price * item.value }}</div>
+        <div class="product-delete">
+          <button type="button" data-toggle="tooltip" title="Ta bort" class="delete" onclick="cart.remove('5');"><i class="fas fa-times-circle"></i></button>
+        </div>
+      </div>
+    </div><!-- cart-row-->
+
+
+
+    <div class="row cart-special-holder">
+      <div class="col-md-12">
+        <div class="cart-special"><div class="cart-special-content">Add some more articles and get discount!!</div></div>
+      </div>
+
+    </div>
+
+  </div>
+
+
+<br><br>
+<br><br>                    <br><br>
+<br><br>
+
+<footer id="footer"><!--Footer-->
+
+  <div class="footer-bottom">
+    <div class="container">
+      <div class="row">
+        <p class="pull-left">Copyright © 2021 TechOn . All rights reserved.</p>
+        <p class="pull-right">TPW Project</p>
+      </div>
+    </div>
+  </div>
+
+</footer>
+
+
+
+<router-outlet></router-outlet>

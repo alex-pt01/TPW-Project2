@@ -4,6 +4,7 @@ import {DRFService} from "../Services/drf.service";
 import {min} from "rxjs/operators";
 import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {CartService} from "../Services/cart.service";
 
 @Component({
   selector: 'app-search',
@@ -39,19 +40,17 @@ export class SearchComponent implements OnInit {
   inPromotion="All";
 
 
-  constructor(private service: DRFService) {
+  constructor(private service: DRFService, private cart: CartService) {
   }
 
   ngOnInit(): void {
     this.getProducts();
-
-
-  }
-  search(value: string){
-    this.category = value;
-    this.searchRemoveAll();
+    this.cart.getCart();
   }
 
+  addToCart(product: Product): void{
+    this.cart.addItem(product,1);
+  }
 
 
   searchRemoveAll(): void {
