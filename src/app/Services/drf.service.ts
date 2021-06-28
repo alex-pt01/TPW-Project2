@@ -5,10 +5,8 @@ import {Observable} from "rxjs";
 import {Promotion} from "../Models/Promotion";
 import {Review} from "../Models/Comment";
 import {User} from "../Models/User";
+import {identifyDynamicQueryNodes} from "@angular/core/schematics/migrations/dynamic-queries/util";
 
-const httpOptions = {
-  headers: new HttpHeaders({'Content-Type':'application/json'})
-}
 @Injectable({
   providedIn: 'root'
 })
@@ -16,13 +14,17 @@ const httpOptions = {
 export class DRFService {
   private BASE_URL = 'https://pedromarques27.pythonanywhere.com/';
   public user: User | null;
+  httpOptions = {
+    headers: new HttpHeaders({'Content-Type':'application/json'})}
   constructor(private http: HttpClient) {
     this.user = null;
   }
 
   login(inUser:string, inPass:string): Observable<User>{
     const url = this.BASE_URL + 'login';
-    return this.http.post<User>(url, {username: inUser, password:inPass}, httpOptions)
+    let answer = this.http.post<User>(url, {username: inUser, password:inPass}, this.httpOptions)
+
+    return answer
   }
 
   //Products
@@ -37,15 +39,15 @@ export class DRFService {
   }
   createProduct(product: Product): Observable<any>{
     const url = this.BASE_URL +'productcre';
-    return this.http.post(url, product, httpOptions);
+    return this.http.post(url, product, this.httpOptions);
   }
   updateProduct(product: Product): Observable<any>{
     const url = this.BASE_URL +'productup/'+product.id;
-    return this.http.put(url, product, httpOptions);
+    return this.http.put(url, product, this.httpOptions);
   }
   deleteProduct(product: Product): Observable<any>{
     const url = this.BASE_URL +'productdel/'+product.id;
-    return this.http.delete<Product>(url, httpOptions);
+    return this.http.delete<Product>(url, this.httpOptions);
   }
 
   search(filters: Map<String, any>): Observable<Product[]>{
@@ -60,7 +62,7 @@ export class DRFService {
       inPromotion: filters.get("inPromotion"),
     }
     const url = this.BASE_URL +'search';
-    return this.http.post<Product[]>(url, f, httpOptions);
+    return this.http.post<Product[]>(url, f, this.httpOptions);
   }
 
   //Promotions
@@ -70,15 +72,15 @@ export class DRFService {
   }
   createPromotion(promotion: Promotion): Observable<any>{
     const url = this.BASE_URL +'promotioncre';
-    return this.http.post(url, promotion, httpOptions);
+    return this.http.post(url, promotion, this.httpOptions);
   }
   updatePromotion(promotion: Promotion): Observable<any>{
     const url = this.BASE_URL +'promotionup/'+promotion.id;
-    return this.http.put(url, promotion, httpOptions);
+    return this.http.put(url, promotion, this.httpOptions);
   }
   deletePromotion(promotion: Promotion): Observable<any>{
     const url = this.BASE_URL +'promotiondel/'+promotion.id;
-    return this.http.delete<Product>(url, httpOptions);
+    return this.http.delete<Product>(url, this.httpOptions);
   }
 
   //Promotions
@@ -87,8 +89,37 @@ export class DRFService {
     return this.http.get<Review[]>(url);
   }
 
+  addToCart(productId: number, quantityn: number): Observable<any>{
+    const url = this.BASE_URL +'addToCart';
+    let token = localStorage.getItem('TOKEN')
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':'application/json',
+        'Authorization': 'Token ' + token})}
+    let body= {product: String(productId), quantity: String(quantityn)}
 
+    return this.http.post(url, body, this.httpOptions);
+  }
 
+  getCart(): Observable<any>{
+    let token = localStorage.getItem('TOKEN')
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':'application/json',
+        'Authorization': 'Token ' + token})}
 
+    const url = this.BASE_URL +'cart';
+    return this.http.get<string>(url, this.httpOptions);
+  }
 
+  getCartTotal(): Observable<any>{
+    let token = localStorage.getItem('TOKEN')
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':'application/json',
+        'Authorization': 'Token ' + token})}
+
+    const url = this.BASE_URL +'cart/total';
+    return this.http.get<string>(url, this.httpOptions);
+  }
 }

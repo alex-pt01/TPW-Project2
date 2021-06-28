@@ -18,7 +18,6 @@ import {MatSelectModule} from "@angular/material/select";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatAutocomplete} from "@angular/material/autocomplete";
 import { LoginComponent } from './login/login.component';
-import {CartService} from "./Services/cart.service";
 import { CartComponent } from './cart/cart.component';
 
 @NgModule({
@@ -43,7 +42,7 @@ import { CartComponent } from './cart/cart.component';
     FormsModule,
 
   ],
-  providers: [DRFService, CartService],
+  providers: [DRFService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

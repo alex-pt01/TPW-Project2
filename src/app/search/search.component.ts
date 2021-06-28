@@ -3,8 +3,6 @@ import {Product} from "../Models/Product";
 import {DRFService} from "../Services/drf.service";
 import {min} from "rxjs/operators";
 import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
-import {MatCheckboxModule} from '@angular/material/checkbox';
-import {CartService} from "../Services/cart.service";
 
 @Component({
   selector: 'app-search',
@@ -18,9 +16,6 @@ export class SearchComponent implements OnInit {
   products = Array<Product>()
   //Filters
 
-  filteredValues = new Map<String, any>();
-
-  categoryForm= new FormGroup({});
 
   CATEGORIES = Array<string>("All");
   SELLERS = Array<string>("All");
@@ -40,16 +35,19 @@ export class SearchComponent implements OnInit {
   inPromotion="All";
 
 
-  constructor(private service: DRFService, private cart: CartService) {
+  constructor(private service: DRFService) {
   }
 
   ngOnInit(): void {
     this.getProducts();
-    this.cart.getCart();
   }
 
   addToCart(product: Product): void{
-    this.cart.addItem(product,1);
+    if (product.id != null) {
+      this.service.addToCart(product.id, 1).subscribe(()=>{
+        alert("Added 1 " +product.name +" to Cart")
+      })
+    }
   }
 
 

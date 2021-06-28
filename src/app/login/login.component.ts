@@ -4,6 +4,7 @@ import {DRFService} from "../Services/drf.service";
 import {Product} from "../Models/Product";
 import {User} from "../Models/User";
 import {Router, RouterModule} from "@angular/router";
+import {HttpHeaders} from "@angular/common/http";
 
 @Component({
   selector: 'app-login',
@@ -30,6 +31,8 @@ export class LoginComponent implements OnInit {
     if (this.username.value && this.password.value){
       this.drf.login(this.username.value, this.password.value).subscribe((u: User)=> {
         this.drf.user = u;
+        localStorage.setItem('TOKEN', u.token)
+        alert(u.token)
         this.router.navigate(['/shop']);
       });
     }
