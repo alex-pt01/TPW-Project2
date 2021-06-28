@@ -27,6 +27,12 @@ export class DRFService {
     return answer
   }
 
+  profile(): Observable<User>{
+    this.getToken()
+    const url = this.BASE_URL + 'profile';
+    return this.http.get<User>(url, this.httpOptions);
+  }
+
   //Products
   getProduct(id:number): Observable<Product>{
     const url = this.BASE_URL + 'product/' + id;
@@ -113,13 +119,16 @@ export class DRFService {
   }
 
   getCartTotal(): Observable<any>{
+    this.getToken()
+    const url = this.BASE_URL +'cart/total';
+    return this.http.get<string>(url, this.httpOptions);
+  }
+
+  getToken(): void{
     let token = localStorage.getItem('TOKEN')
     this.httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':'application/json',
         'Authorization': 'Token ' + token})}
-
-    const url = this.BASE_URL +'cart/total';
-    return this.http.get<string>(url, this.httpOptions);
   }
 }

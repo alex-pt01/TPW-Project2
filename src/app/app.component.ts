@@ -12,4 +12,7 @@ export class AppComponent {
   constructor(private drfService: DRFService) {
 
   }
+  logout(): void{
+    localStorage.clear();
+  }
 }

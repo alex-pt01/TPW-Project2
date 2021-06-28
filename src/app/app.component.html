@@ -7,7 +7,7 @@
         <div class="navbar">
           <a  >Home</a>
           <a routerLink="/shop" >Products</a>
-          <a  >Cart</a>
+          <a  routerLink="/cart" >Cart</a>
 
           <!--{% if user.is_authenticated %}-->
           <div class="dropdown">
@@ -22,7 +22,7 @@
             </div>
           </div>
           <a href="" style="float:right" routerLink="/account">Profile</a>
-          <a style="float:right"><i class="icon-signout"></i>Logout </a>
+          <a routerLink="/login" (click)="logout()" style="float:right"><i class="icon-signout"></i>Logout </a>
         </div>
 
 
