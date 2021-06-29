@@ -28,6 +28,7 @@ import { CartComponent } from './cart/cart.component';
     ProductDetailsComponent,
     LoginComponent,
     CartComponent,
+
   ],
   imports: [
     BrowserModule,

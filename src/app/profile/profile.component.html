@@ -3,32 +3,41 @@
   <div    style="  margin:auto;
                       width:20%;
                       padding:63px;
-                     " *ngIf="user!=null">
-    <div class="login-form" style="width:300px; height: 300px; text-align: center; margin-left: 30px; border: #2a6496; border-style: solid"><!--login form-->
+                     " *ngIf="user!=null && profileForm" >
+
       <h2>My Account</h2>
+    <form id="form-box"  [formGroup]="profileForm" method="post" (ngSubmit)="save()">
+      <div id="form-title">Profile</div>
 
-      <label>Name:</label>
-      {{ user.last_name }}, {{ user.first_name }}
-      <br>
-      <label>Joined:</label>
-      {{ user.date_joined }}
-      <br>
-      <label>Username:</label>
-      {{ user.username }}
-      <br>
-      <label>Email:</label>
-      {{ user.email }}
-      <br>
-      <label>Credits:</label>
-      {{ credits }}
+
+      <div>
+        <div class="form-header">Email</div>
+        <p class="form-input" >{{user.email}}</p>
+
+        <div class="form-header">Username</div>
+        <input formControlName="username" type="text" class="form-input" [value]="user.username" />
+
+        <div class="form-header">Username</div>
+        <input formControlName="password" type="text" class="form-input" value="Insert Your New Or Old Password" />
+      </div>
+
+
+
+      <p formControlName="credits" type="number"  class="form-input" >Your Credits: {{credits}}</p>
+      <p formControlName="credits" type="number"  class="form-input" >Date Joined: {{ user.date_joined }}</p>
+
+
+
       <p>
-        <a class="btn btn-sm btn-danger">Delete Account</a>
+        <button class="btn btn-sm btn-danger">Delete Account</button>
       </p>
       <p>
-        <a class="btn btn-sm btn-info" >Update Account</a>
-      </p>
+        <input type="submit" class="btn btn-sm btn-info" value="Save">
+    </form>
 
-    </div><!--/login form-->
+
+
+
   </div>
 
 
@@ -42,9 +51,9 @@
 
     </div>
   </div>
-  <section *ngFor="let scart of scarts | keyvalue" id="cart_items">
-    <div class="table-responsive cart_info">
-      <table class="table table-condensed" style="width:80%; margin-left: 10%; margin-right: 10%">
+  <section *ngFor="let scart of scarts | keyvalue" id="cart_items" >
+    <div class="table-responsive cart_info"   style="width:80%; margin-left: 10%; margin-right: 10%; background-color: lightgrey">
+      <table class="table table-condensed"  style="width:100%;">
         <thead>
 
         <tr class="cart_menu">
@@ -86,6 +95,7 @@
 
         </tbody>
       </table>
+
       <div class="row" style="width:80%; margin-left: 10%; margin-right: 10%">
         <div class="col-sm-6">
           <div class="total_area">
@@ -104,5 +114,5 @@
 
 
    </section>
-
+<br>
 

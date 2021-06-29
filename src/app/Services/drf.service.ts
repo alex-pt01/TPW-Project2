@@ -26,6 +26,8 @@ export class DRFService {
 
   login(inUser:string, inPass:string): Observable<User>{
     const url = this.BASE_URL + 'login';
+    this.httpOptions = {
+      headers: new HttpHeaders({'Content-Type':'application/json'})}
     let answer = this.http.post<User>(url, {username: inUser, password:inPass}, this.httpOptions)
 
     return answer
@@ -151,7 +153,6 @@ export class DRFService {
   getShoppingCarts(username: string): Observable<Payment[]>{
     this.getToken();
     const url = this.BASE_URL +'shoppingcarts/'+username;
-    alert(url)
     return this.http.get<Payment[]>(url, this.httpOptions);
   }
 
