@@ -50,31 +50,73 @@
       </table>
     </div>
   </div>
-</section> <!--/#cart_items-->
 
-<section id="do_action">
-  <div class="container">
 
-    <div class="row">
-      <div class="col-sm-6">
-        <div class="total_area">
-          <ul>
+  <div class="row" style="width:80%; margin-left: 10%; margin-right: 10%">
+    <div class="col-sm-6">
+      <div class="total_area">
+        <ul>
 
-            <li>Cart Sub Total <span>{{ subtotal }}</span></li>
-            <li>Discount <span>{{ discount }}</span></li>
-            <li>Total <span>{{ total }}</span></li>-->
-          </ul>
+          <li>Cart Sub Total <span>{{ subtotal }}</span></li>
+          <li>Discount <span>{{ discount }}</span></li>
+          <li>Total <span>{{ total }}</span></li>
+        </ul>
 
-          <a class="btn btn-default check_out"  type="submit" >Check Out</a>
 
-        </div>
       </div>
     </div>
   </div>
-</section><!--/#do_action-->
+
+</section>
+
+
+<div *ngIf="checkoutForm && total!=0" style="margin-right: 20%; margin-left: 20%" >
+  <form id="form-box"  [formGroup]="checkoutForm" method="post" (ngSubmit)="checkout()">
+    <div id="form-title">Checkout</div>
+
+    <div class="form-header">Payment Method</div>
+    <div>
+      <p *ngIf="checkoutForm.controls['type'].invalid" style="color:red">Choose a Card Type</p>
+      <select formControlName="type" style="width:30%; margin-right: 10px">
+        <option>
+          Credit Card
+        </option>
+        <option>
+          Debit Card
+        </option>
+      </select>
+      <br>
+      <div class="form-header">Card Number</div>
+      <p *ngIf="checkoutForm.controls['cardno'].invalid" style="color:red">Invalid Card Number, must be 16 digits</p>
+      <input formControlName="cardno" type="text" class="form-input"  [(ngModel)]="cardNo" />
+      <div class="form-header">CVC</div>
+      <p *ngIf="checkoutForm.controls['code'].invalid" style="color:red">Invalid Card Code, must be 3 digits</p>
+      <input type="number" formControlName="code" style="width:20%" class="form-input" />
+      <div class="form-header">Date</div>
+      <p *ngIf="checkoutForm.controls['month'].invalid" style="color:red">Invalid Month, must be MM</p>
+      <p *ngIf="checkoutForm.controls['year'].invalid" style="color:red">Invalid Year, must be YYYY</p>
+      <input type="number" formControlName="month" class="form-input" style="width:20%" placeholder="MM" />
+      <input type="number" formControlName="year" class="form-input" style="width:20%" placeholder="YYYY" />
+    </div>
 
 
 
+
+    <div class="form-header">Credis</div>
+    <p *ngIf="checkoutForm.controls['credits'].invalid" style="color:red">Invalid Month, must be less than {{credits}}</p>
+    <input formControlName="credits" type="number" placeholder="Max = {{credits}}" class="form-input" id="city" />
+
+    <div class="form-header">Address</div>
+    <input formControlName="address" class="form-input" id="region" />
+
+
+    <input [disabled]="checkoutForm.invalid" type="submit"  class="btn btn-default check_out" style="float:right" value="CheckOut">
+  </form>
+
+</div>
+
+
+<br>
 <footer>
 
   <div class="footer-bottom">

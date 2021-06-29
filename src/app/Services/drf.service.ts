@@ -33,6 +33,12 @@ export class DRFService {
     return this.http.get<User>(url, this.httpOptions);
   }
 
+  credits(): Observable<number>{
+    this.getToken()
+    const url = this.BASE_URL + 'user/credits';
+    return this.http.get<number>(url, this.httpOptions);
+  }
+
   //Products
   getProduct(id:number): Observable<Product>{
     const url = this.BASE_URL + 'product/' + id;
@@ -131,4 +137,12 @@ export class DRFService {
         'Content-Type':'application/json',
         'Authorization': 'Token ' + token})}
   }
+  checkout(a: string, t:number, u:number, c:number, type:string): Observable<any>{
+    this.getToken();
+    const url = this.BASE_URL +'pay';
+    let body= {address: a, total:t, credits:u, cardNo:c, typeOfCard:type}
+    alert(JSON.stringify(body))
+    return this.http.post(url, body, this.httpOptions);
+  }
 }
+

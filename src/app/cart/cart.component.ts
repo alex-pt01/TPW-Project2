@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Product} from "../Models/Product";
 import {DRFService} from "../Services/drf.service";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
+
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
@@ -11,13 +13,73 @@ export class CartComponent implements OnInit {
   total = 0;
   subtotal=0;
   discount = 0;
+  credits = 0;
+  cardNo: string | null = '**** **** **** ****';
+
+  checkoutForm: FormGroup | null = null;
+
+
   constructor(private service: DRFService) {
 
   }
 
   ngOnInit(): void {
+    this.createForm()
     this.getCart()
     this.getTotal();
+
+  }
+  createForm(): void{
+    this.service.credits().subscribe((creds: number)=>
+    {
+      this.credits = creds;
+
+      if (localStorage.getItem('CARD_NO')){
+        this.cardNo = localStorage.getItem('CARD_NO')
+      }
+      this.checkoutForm = new FormGroup({
+        cardno: new FormControl('', [
+          Validators.required,
+          Validators.minLength(16),
+          Validators.maxLength(16),
+          Validators.min(0)
+        ]),
+        type: new FormControl('', [
+          Validators.required,
+        ]),
+        code: new FormControl('',[
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(3),
+          Validators.min(0)
+        ] ),
+        year: new FormControl('',
+          [
+            Validators.required,
+            Validators.minLength(4),
+            Validators.maxLength(4),
+            Validators.min(1900),
+
+          ]),
+        month: new FormControl('', [
+          Validators.required,
+          Validators.min(1),
+          Validators.max(12)
+        ]),
+        address: new FormControl('',
+          [
+            Validators.required,
+          ]),
+        credits: new FormControl('', [
+          Validators.required,
+          Validators.min(0),
+          Validators.max(creds)
+        ]),
+
+      });
+
+    });
+
   }
   getCart(): void{
     this.cart=new Map<Product,any>();
@@ -50,7 +112,7 @@ export class CartComponent implements OnInit {
   getTotal():void{
     this.service.getCartTotal().subscribe((cartTotal: number)=>
     {
-     this.total=cartTotal
+      this.total=cartTotal;
     });
   }
   addToCart(product: Product): void{
@@ -61,5 +123,20 @@ export class CartComponent implements OnInit {
         this.getTotal()
       })
     }
+  }
+  checkout(): void{
+    alert('-------------')
+    if(this.checkoutForm){
+      let cardno = this.checkoutForm.controls['cardno'].value
+      this.service.checkout(this.checkoutForm.controls['address'].value, this.total, this.checkoutForm.controls['credits'].value,
+        cardno, this.checkoutForm.controls['type'].value).subscribe(()=>{
+        localStorage.setItem('CARD_NO',  cardno);
+          alert('Payment Succeeded ')
+        window.location.reload();
+
+      })
+
+    }
+
   }
 }
