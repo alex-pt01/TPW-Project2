@@ -6,6 +6,10 @@ import {Promotion} from "../Models/Promotion";
 import {Review} from "../Models/Comment";
 import {User} from "../Models/User";
 import {identifyDynamicQueryNodes} from "@angular/core/schematics/migrations/dynamic-queries/util";
+import {Sold} from "../Models/Sold";
+import {ShoppingCart} from "../Models/ShoppingCart";
+import {Payment} from "../Models/Payment";
+import {ShoppingCartItem} from "../Models/ShoppingCartItem";
 
 @Injectable({
   providedIn: 'root'
@@ -143,6 +147,18 @@ export class DRFService {
     let body= {address: a, total:t, credits:u, cardNo:c, typeOfCard:type}
     alert(JSON.stringify(body))
     return this.http.post(url, body, this.httpOptions);
+  }
+  getShoppingCarts(username: string): Observable<Payment[]>{
+    this.getToken();
+    const url = this.BASE_URL +'shoppingcarts/'+username;
+    alert(url)
+    return this.http.get<Payment[]>(url, this.httpOptions);
+  }
+
+  getShoppingCartItems(id: number): Observable<ShoppingCartItem[]>{
+    this.getToken();
+    const url = this.BASE_URL +'shoppingcarts/'+id+"/items/";
+    return this.http.get<ShoppingCartItem[]>(url, this.httpOptions);
   }
 }
 

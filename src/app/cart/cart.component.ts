@@ -121,17 +121,16 @@ export class CartComponent implements OnInit {
         alert("Removed From Cart")
         this.getCart()
         this.getTotal()
+
       })
     }
   }
   checkout(): void{
-    alert('-------------')
     if(this.checkoutForm){
       let cardno = this.checkoutForm.controls['cardno'].value
       this.service.checkout(this.checkoutForm.controls['address'].value, this.total, this.checkoutForm.controls['credits'].value,
         cardno, this.checkoutForm.controls['type'].value).subscribe(()=>{
         localStorage.setItem('CARD_NO',  cardno);
-          alert('Payment Succeeded ')
         window.location.reload();
 
       })

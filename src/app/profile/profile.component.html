@@ -20,7 +20,7 @@
       {{ user.email }}
       <br>
       <label>Credits:</label>
-      <!--{{ credits }}€-->
+      {{ credits }}
       <p>
         <a class="btn btn-sm btn-danger">Delete Account</a>
       </p>
@@ -42,64 +42,67 @@
 
     </div>
   </div>
-  <section id="cart_items">
-    <!--
-     <div class="container">
-       <div class="table-responsive cart_info">
-         <table class="table table-condensed">
-           <thead>
-           <tr class="cart_menu">
-             <td class="image">Item</td>
-             <td class="description">Product</td>
-             <td class="description">Description</td>
+  <section *ngFor="let scart of scarts | keyvalue" id="cart_items">
+    <div class="table-responsive cart_info">
+      <table class="table table-condensed" style="width:80%; margin-left: 10%; margin-right: 10%">
+        <thead>
 
-             <td class="quantity">Quantity</td>
-             <td class="price">Price</td>
-             <td></td>
-           </tr>
-           </thead>
-           <tbody>
+        <tr class="cart_menu">
+          <td class="image">Item</td>
+          <td class="description">Description</td>
+          <td class="description">Description</td>
+          <td class="quantity">Quantity</td>
+          <td class="price">Price</td>
 
-           <tr>
-             <td class="col-sm-3 cart_product">
-               <a href=""><img style="width: 200px" src="{{ sci.product.image.url }}" alt=""></a>
-             </td>
-
-             <td class="col-sm-4 cart_description">
-               <h4><a href="">{{ sci.product.name }}</a></h4>
-               <p>Web ID: {{ sci.product.id }}</p>
-             </td>
-             <td class="col-sm-2 cart_price" style="max-width:300px">
-               <p>{{ sci.product.description }}</p>
-             </td>
-             <td class="cart_quantity">
-               <div class="cart_quantity_button">
-                 <input class="cart_quantity_input" type="text" name="quantity" value="{{ sci.quantity }}" autocomplete="off" size="2"/>
-               </div>
-             </td>
-             <td class="cart_total">
-               <p class="cart_total_price">{{ sci.product.price }}€</p>
-             </td>
+        </tr>
+        </thead>
+        <tbody>
 
 
-           </tr>
+        <tr *ngFor="let item of scart.value " >
+          <td class="col-sm-3 cart_product">
+            <a href=""><img style="width: 200px" src="{{ item.product.image }}" alt=""></a>
+          </td>
+          <td class="cart_description">
+            <h4><a href="">{{ item.product.name }}</a></h4>
+            <p>Web ID: {{ item.product.id }}</p>
+          </td>
+          <td class="cart_price" style="max-width:300px">
+            <p>{{ item.product.description }}</p>
+          </td>
+          <td class="cart_quantity">
+            <div class="cart_quantity_button">
+              <a class="cart_quantity_input" type="text" name="quantity"  autocomplete="off" size="2">{{ item.quantity }}</a>
+            </div>
+          </td>
+          <td class="cart_total">
+            <p class="cart_total_price">{{ item.product.price }}€</p>
+            <p *ngIf="item.product.promotion" class="cart_total_price" style="color:blue">-{{ item.product.price*item.product.promotion.discount }}€</p>
 
-           {% endfor %}
-           <tr>
-             <td class="description"><p></p></td>
-             <td class="description">Date: <h4>{{ payment.date }}</h4></td>
-             <td class="description">Address: <h4>{{ payment.address }}</h4></td>
-             <td class="price">Total: <h4>{{ payment.total }}</h4></td>
-             <td class="price">Credits: <h4>-{{ payment.usedCredits }}</h4></td>
+          </td>
 
-           </tr>
+        </tr>
 
 
+        </tbody>
+      </table>
+      <div class="row" style="width:80%; margin-left: 10%; margin-right: 10%">
+        <div class="col-sm-6">
+          <div class="total_area">
+            <ul>
 
-           </tbody>
-         </table>
-       </div>
-     </div>-->
+              <li>Address <span>{{ scart.key.address }}</span></li>
+              <li>Credits Used <span>{{ scart.key.usedCredits }}</span></li>
+              <li>Total <span>{{ scart.key.total - scart.key.usedCredits }}</span></li>
+            </ul>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
    </section>
 
 
