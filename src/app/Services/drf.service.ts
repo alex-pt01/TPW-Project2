@@ -44,6 +44,17 @@ export class DRFService {
     const url = this.BASE_URL + 'user/credits';
     return this.http.get<number>(url, this.httpOptions);
   }
+  updateUser(us:string, em:string, pass:string, id:number): Observable<any>{
+    this.getToken()
+    const url = this.BASE_URL + 'userup/'+id;
+    let body = {email: em, password: pass, username:us}
+    return this.http.put<any>(url, body, this.httpOptions);
+  }
+  deleteAccount(id:number): Observable<any>{
+    this.getToken()
+    const url = this.BASE_URL + 'userdel/'+id+"/";
+    return this.http.delete<any>(url, this.httpOptions);
+  }
 
   //Products
   getProduct(id:number): Observable<Product>{

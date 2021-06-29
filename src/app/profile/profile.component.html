@@ -11,28 +11,28 @@
 
 
       <div>
+        <div class="form-header">Username</div>
+        <p class="form-input" >{{user.username}}</p>
+
         <div class="form-header">Email</div>
-        <p class="form-input" >{{user.email}}</p>
+        <input formControlName="email" type="text" class="form-input" [(ngModel)]="email" />
 
-        <div class="form-header">Username</div>
-        <input formControlName="username" type="text" class="form-input" [value]="user.username" />
-
-        <div class="form-header">Username</div>
-        <input formControlName="password" type="text" class="form-input" value="Insert Your New Or Old Password" />
+        <div class="form-header">Password</div>
+        <input formControlName="password" type="text" class="form-input" placeholder="Insert Your New Or Old Password" />
       </div>
 
 
 
-      <p formControlName="credits" type="number"  class="form-input" >Your Credits: {{credits}}</p>
+      <p formControlName="credits" type="number"  class="form-input" ><b>Your Credits:</b> {{credits}}</p>
       <p formControlName="credits" type="number"  class="form-input" >Date Joined: {{ user.date_joined }}</p>
 
 
 
       <p>
-        <button class="btn btn-sm btn-danger">Delete Account</button>
+        <button class="btn btn-sm btn-danger" (click)="delete()">Delete Account</button>
       </p>
       <p>
-        <input type="submit" class="btn btn-sm btn-info" value="Save">
+        <input type="submit" class="btn btn-sm btn-info" value="Save"></p>
     </form>
 
 

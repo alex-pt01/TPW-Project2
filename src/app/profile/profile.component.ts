@@ -16,6 +16,8 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 export class ProfileComponent implements OnInit {
   user: User | null = null;
   credits = 0;
+  email='';
+  password='';
   scarts = new Map<Payment, Array<ShoppingCartItem>>();
   profileForm: FormGroup | null = null;
   constructor(private service: DRFService, private router: Router) {
@@ -39,19 +41,32 @@ export class ProfileComponent implements OnInit {
       this.service.credits().subscribe((cr: number)=>{
         this.credits = cr;
         this.createForm();
+        this.email=pr.email;
       })
 
       this.getBought()
     })
   }
   save(): void{
+    if(this.profileForm && this.user && this.user.id){
+      this.service.updateUser(this.user.username, this.profileForm.controls['email'].value,  this.profileForm.controls['password'].value, this.user.id).subscribe(()=>{
+        window.location.reload();
+      })
+
+    }
+  }
+  delete(): void{
+    let a = confirm("Do You Really Wish To Delete Your Account?")
+    if(a && this.user && this.user.id){
+      this.service.deleteAccount(this.user.id).subscribe((_)=>{
+        localStorage.clear();
+        this.router.navigate(['/login']);
+      })
+    }
 
   }
   createForm(): void{
       this.profileForm = new FormGroup({
-        username: new FormControl('', [
-          Validators.required,
-        ]),
         email: new FormControl('', [
           Validators.required,
         ]),
