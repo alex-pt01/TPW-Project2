@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {Product} from "../Models/Product";
-import {FormBuilder} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {DRFService} from "../Services/drf.service";
 import {Router} from "@angular/router";
+import {User} from "../Models/User";
+import {Promotion} from "../Models/Promotion";
 
 @Component({
   selector: 'app-products',
@@ -12,6 +14,10 @@ import {Router} from "@angular/router";
 
 export class ProductsComponent implements OnInit {
   products = Array<Product>();
+  productForm: FormGroup | null = null;
+  user: User|null = null;
+  CATEGORY =['Smartphones','Computers','Tablets','Drones', 'Televisions']
+  PROMOTIONS = Array<Promotion>();
   //productGroup: FormGroup;
   constructor( private formbuilder: FormBuilder,
                private service: DRFService,
@@ -21,6 +27,7 @@ export class ProductsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getProducts();
+    this.createForm();
 
 
   }
@@ -31,6 +38,42 @@ export class ProductsComponent implements OnInit {
       this.products = pr;
     })
   }
+  createForm(): void{
+    this.service.profile().subscribe((pr: User)=> {
+      this.user=pr;
+      this.service.getPromotions().subscribe((promos: Promotion[])=>{
+        this.PROMOTIONS = promos;
+        this.productForm = new FormGroup({
+          name: new FormControl('', [
+            Validators.required
+          ]),
+          price: new FormControl('', [
+            Validators.required,
+            Validators.min(0)]),
+          description: new FormControl('', [
+            Validators.required,
+            Validators.minLength(6),
+          ]),
+          quantity: new FormControl('', [
+            Validators.required,
+            Validators.min(0)
+          ]),
+          image: new FormControl('', [
+            Validators.required,
+          ]),
+          brand: new FormControl('', [
+            Validators.required,
+          ]),
+          category:new FormControl('', [
+            Validators.required,
+          ]),
+        });
+      });
+
+    });
+
+  }
+
   /*
   addProduct(): void {
     if(this.productGroup ){
