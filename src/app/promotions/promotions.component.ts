@@ -64,6 +64,8 @@ export class PromotionsComponent implements OnInit {
       let p = new Promotion(null, this.promotionForm.controls['name'].value, this.promotionForm.controls['discount'].value, this.promotionForm.controls['description'].value, this.promotionForm.controls['deadline'].value)
       this.service.createPromotion(p).subscribe((_)=>{
         alert('Promotion Created')
+        window.location.reload()
+
       });
     }
 

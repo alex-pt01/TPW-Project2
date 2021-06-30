@@ -37,7 +37,7 @@ export class HomeComponent implements OnInit {
     this.service.getProducts().subscribe((pr: Product[])=>
     {
       this.products = pr;
-      for (let i = 0; i < 5; i++) {
+      for (let i = 0; i < 4; i++) {
 
           this.allProducts.push(this.products[i])
 

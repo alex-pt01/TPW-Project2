@@ -11,18 +11,18 @@
         <p></p>
         <table class="styled-table" style="margin: 0 auto; width:100%; border: solid black 2px;">
           <tr style="background-color: darkorange; color:white">
-            <th>Name</th>
-            <th>Price</th>
-            <th>Description</th>
-            <th>Quantity</th>
-            <th>Condition</th>
-            <th>Seller</th>
-            <th>Brand</th>
-            <th>Category</th>
-            <th>Promotion</th>
-            <th>Image</th>
-            <th>Update</th>
-            <th>Remove</th>
+            <th style="font-size: 18px">Name</th>
+            <th style="font-size: 18px">Price</th>
+            <th style="font-size: 18px" >Description</th>
+            <th style="font-size: 18px">Quantity</th>
+            <th style="font-size: 18px">Condition</th>
+            <th style="font-size: 18px">Seller</th>
+            <th style="font-size: 18px">Brand</th>
+            <th style="font-size: 18px">Category</th>
+            <th style="font-size: 18px">Promotion</th>
+            <th style="font-size: 18px" >Image</th>
+            <th style="font-size: 18px">Update</th>
+            <th style="font-size: 18px"> Remove</th>
           </tr>
 
           <tr *ngFor="let product of
@@ -47,45 +47,46 @@
 
   <br>
   <div>
-    <div style="width:40%; margin-left: 5%; margin-right: 5%; ">
+    <div >
 
-      <div *ngIf="productForm " style="margin-right: 20%; margin-left: 20%" >
-        <form id="form-box"  method="post"  [formGroup]="productForm"  >
+      <div *ngIf="productForm " >
+        <form style="magin: 0 auto; width: 800px; " id="form-box"  method="post"  [formGroup]="productForm"  >
 
 
-          <div class="form-header">Create Product</div>
+          <h2 class="form-header" style="font-size: 22px">Create Product</h2>
           <div>
-            <p *ngIf="productForm.controls['name'].invalid" style="color:red">Insert a name for the Product</p>
+            <p *ngIf="productForm.controls['name'].invalid" style="color:red; font-size: 18px">Insert a name for the Product</p>
             <input formControlName="name" type="text" *ngIf="currentProduct" [(ngModel)]="currentProduct.name" class="form-input"/>
             <input formControlName="name" type="text" *ngIf="!currentProduct"  class="form-input"/>
             <br>
-            <p *ngIf="productForm.controls['description'].invalid" style="color:red">Insert a Description</p>
+            <p *ngIf="productForm.controls['description'].invalid" style="color:red; font-size: 18px">Insert a Description</p>
             <input formControlName="description" *ngIf="currentProduct" [(ngModel)]="currentProduct.description"  type="text" class="form-input"/>
             <input formControlName="description" *ngIf="!currentProduct" type="text" class="form-input"/>
 
-            <p *ngIf="productForm.controls['brand'].invalid" style="color:red">Insert a brand for the Product</p>
+            <p *ngIf="productForm.controls['brand'].invalid" style="color:red; font-size: 18px">Insert a brand for the Product</p>
             <input formControlName="brand" *ngIf="currentProduct" [(ngModel)]="currentProduct.brand"  type="text" class="form-input"/>
             <input formControlName="brand" *ngIf="!currentProduct" type="text" class="form-input"/>
 
-            <p *ngIf="productForm.controls['quantity'].invalid" style="color:red">Insert a Quantity for the Product</p>
+            <p *ngIf="productForm.controls['quantity'].invalid" style="color:red; font-size: 18px">Insert a Quantity for the Product</p>
             <input formControlName="quantity"  *ngIf="currentProduct" [(ngModel)]="currentProduct.quantity" type="number" class="form-input"/>
             <input formControlName="quantity" *ngIf="!currentProduct" type="number" class="form-input"/>
-            <p *ngIf="productForm.controls['price'].invalid" style="color:red">Insert a Price</p>
+            <p *ngIf="productForm.controls['price'].invalid" style="color:red; font-size: 18px">Insert a Price</p>
             <input formControlName="price" *ngIf="currentProduct" [(ngModel)]="currentProduct.price"  type="number" class="form-input"/>
             <input formControlName="price" *ngIf="!currentProduct" type="number" class="form-input"/>
 
 
             <input formControlName="image"  (change)="onFileChanged($event)" type="file" class="form-input"/>
 
-            <p *ngIf="productForm.controls['category'].invalid" style="color:red">Insert a name for the Product</p>
-            <div class="form-header">Category</div>
+            <p *ngIf="productForm.controls['category'].invalid" style="color:red; font-size: 18px"></p>
+            <br><br>
+            <div class="form-header" style="font-size: 18px">Category</div>
             <select formControlName="category" style="width:30%; margin-right: 10px">
               <option *ngFor="let c of CATEGORY">
                 {{c}}
               </option>
             </select>
 
-            <div class="form-header">Promotion</div>
+            <div class="form-header" style="font-size: 18px">Promotion</div>
             <select  formControlName="promotion" style="width:30%; margin-right: 10px">
 
                 <option *ngFor="let c of PROMOTIONS" [ngValue]="c">
@@ -94,7 +95,7 @@
 
 
             </select>
-            <div class="form-header">Condition</div>
+            <div class="form-header" style="font-size: 18px">Condition</div>
             <select formControlName="condition" style="width:30%; margin-right: 10px">
               <option value="New">
                 New
@@ -105,15 +106,17 @@
             </select>
           </div>
           <input type="submit" *ngIf="currentProduct" (click)="update()"  class="btn btn-default check_out" value="Save"/>
-          <input type="submit"  (click)="create()" class="btn btn-default check_out" value="Create New"/>
+          <input style="font-size: 18px; float:right" type="submit"  (click)="create()" class="btn btn-default check_out" value="Create New"/>
+          <br><br>
         </form>
 
       </div>
 
     </div>
   </div>
-
+<br><br>
 </div>
+
   <footer id="footer"><!--Footer-->
 
     <div class="footer-bottom">

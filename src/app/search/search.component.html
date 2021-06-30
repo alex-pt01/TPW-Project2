@@ -5,15 +5,17 @@
       <!--SHOW PRODUCTS-->
 
       <form class="example-form" (ngSubmit)="searchRemoveAll()">
-        <div>Search</div>
-        <input id="name" type="text" [formControl]="query">
+        <h2>Search</h2>
+        <input placeholder="search" style="margin:5px; width: 180px" id="name" type="text" [formControl]="query">
 
         <hr>
-        <div>Price Range</div>
-        <p><input style="margin:5px" type="number" [(ngModel)]="priceRange[0]" [formControl]="minPrice"><input type="number" style="margin:5px" [(ngModel)]="priceRange[1]" [formControl]="maxPrice"></p>
-        <input type="submit">
+        <h2>Price Range</h2>
+        <p><input style="margin:5px; width: 80px" type="number" [(ngModel)]="priceRange[0]" [formControl]="minPrice">--<input type="number" style="margin:5px; width: 80px" [(ngModel)]="priceRange[1]" [formControl]="maxPrice"></p>
+        <input style="float:right;" type="submit">
+        <br><br>
       </form>
   <hr/>
+  <br>
       <p><mat-form-field appearance="fill">
         <mat-label>Category</mat-label>
         <mat-select  [(value)]="category" (selectionChange)="searchRemoveAll()">
@@ -80,7 +82,8 @@
 <div class="col-sm-9 padding-right">
 
 
-  <div class="features_items">
+  <div style="margin-bottom: 200px" class="features_items">
+    <br><br><br>
       <h2 class="title text-center">Features Items {{products.length}} </h2>
       <div class="container"  *ngFor="let product of products" >
 
@@ -97,7 +100,7 @@
               <a class="price" *ngIf="product.promotion" style="text-decoration: line-through">{{ product.price }} €</a>
               <a class="price" *ngIf="product.promotion">{{ product.price- product.price*product.promotion.discount }} €</a>
               <a class="price" *ngIf="product.promotion == null">{{ product.price }} €</a>
-              <a *ngIf="product.quantity!=0" (click)="addToCart(product)" class="add-to-cart" type="submit" ><i class="fa fa-shopping-cart"><span class="add-to-cart" style="font-family: Roboto, sans-serif">Add To Cart</span></i></a>
+              <a *ngIf="product.quantity!=0" (click)="addToCart(product)" class="add-to-cart" type="submit" ><span class="add-to-cart" style="font-family: Roboto, sans-serif; color: #009879">Add To Cart</span></a>
               <a *ngIf="product.quantity==0" type="submit" > <span class="not-in-stock">Not In Stock</span></a>
             </p>
 
