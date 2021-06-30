@@ -28,6 +28,7 @@ export class DRFService {
     const url = this.BASE_URL + 'login';
     this.httpOptions = {
       headers: new HttpHeaders({'Content-Type':'application/json'})}
+    alert(inUser + inPass)
     let answer = this.http.post<User>(url, {username: inUser, password:inPass}, this.httpOptions)
 
     return answer
