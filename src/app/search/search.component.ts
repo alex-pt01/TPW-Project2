@@ -73,7 +73,7 @@ export class SearchComponent implements OnInit {
       this.allProducts = pr;
       this.products = pr;
       for (let i = 0; i < this.products.length; i++) {
-        if(this.products[i].promotion){
+        if(this.products[i].promotion!=null){
           this.promotions.push(this.products[i].promotion.name)
         }
       }

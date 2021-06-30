@@ -71,31 +71,7 @@ export class DRFService {
     this.getToken();
     const url = this.BASE_URL +'productcre';
 
-
     let f  = {
-      name: product.name,
-      description: product.description,
-      brand: product.brand,
-      seller:product.seller,
-      price: product.price,
-      category: product.category,
-      condition: 'New',
-      stock: product.stock,
-      quantity: product.quantity,
-      promotion: product.promotion.id
-    }
-    const formData: FormData = new FormData();
-    formData.append("image",product.image);
-    formData.append("data", JSON.stringify(f))
-
-    return  this.http.post(url, f, this.httpOptions);
-  }
-
-  updateProduct(product: Product): Observable<any>{
-    const url = this.BASE_URL +'productup/'+product.id;
-
-    let f  = {
-      id: product.id,
       name: product.name,
       description: product.description,
       brand: product.brand,
@@ -105,14 +81,40 @@ export class DRFService {
       condition: product.condition,
       stock: product.stock,
       quantity: product.quantity,
-      promotion: product.promotion
+      promotion: product.promotion.id,
+      image: product.image
     }
 
     const formData: FormData = new FormData();
-    formData.append("image",product.image);
-    formData.append("data", JSON.stringify(f))
 
-    return this.http.put(url, product, this.httpOptions);
+    formData.append("data", JSON.stringify(f))
+    return  this.http.post(url, f, this.httpOptions);
+  }
+
+  updateProduct(product: Product): Observable<any>{
+    const url = this.BASE_URL +'productup/'+product.id;
+    alert(url)
+
+    let f  = {
+      id:product.id,
+      name: product.name,
+      description: product.description,
+      brand: product.brand,
+      seller:product.seller,
+      price: product.price,
+      category: product.category,
+      condition: product.condition,
+      stock: product.stock,
+      quantity: product.quantity,
+      promotion: product.promotion.id,
+      image: product.image
+    }
+
+
+
+
+
+    return this.http.put(url, f, this.httpOptions);
   }
 
   deleteProduct(productId: number): Observable<any>{
