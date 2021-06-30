@@ -1,6 +1,6 @@
 import {Product} from "./Product";
 
-export class Review{
+export class Comment{
   id: number | null;
   userName: string;
   userEmail: string;

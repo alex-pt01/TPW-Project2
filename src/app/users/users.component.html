@@ -1,0 +1,60 @@
+<div style="  margin:auto;
+          width:90%;
+          padding:10px;">
+
+
+
+  <div class="row "  >
+    <div class="col-sm-12"   >
+      <br>
+
+      <br>
+
+      <p></p>
+      <table class="styled-table" style="width: 1000px; height: 200px;  border: solid black 2px;">
+        <tr style="background-color: darkorange; color:white">
+          <th>Username</th>
+          <th>Email</th>
+          <th>Superuser?</th>
+          <th>Date joined</th>
+
+
+          <th>Remove</th>
+        </tr>
+
+        <tr *ngFor="let user of
+           users">
+          <th >{{ user.username }}</th>
+          <th >{{ user.email }}</th>
+          <th *ngIf="user.is_superuser">TRUE</th>
+          <th *ngIf="!user.is_superuser">FALSE</th>
+          <th >{{ user.date_joined }}</th>
+
+          <th><button type="button" class="btn btn-success" (click)="deleteUser(user.id)">Delete
+          </button></th>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <br>
+
+  </div>
+
+
+
+<div style="max-height: 50px">
+<footer  id="footer"><!--Footer-->
+
+  <div class="footer-bottom">
+    <div class="container">
+      <div class="row">
+        <p class="pull-left">Copyright © 2021 TechOn . All rights reserved.</p>
+        <p class="pull-right">TPW Project</p>
+      </div>
+    </div>
+  </div>
+
+</footer>
+</div>
+
+

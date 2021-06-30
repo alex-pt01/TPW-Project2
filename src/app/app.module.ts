@@ -20,6 +20,9 @@ import {MatAutocomplete} from "@angular/material/autocomplete";
 import { LoginComponent } from './login/login.component';
 import { CartComponent } from './cart/cart.component';
 import { ProductsComponent } from './products/products.component';
+import { PromotionsComponent } from './promotions/promotions.component';
+import { CommentsComponent } from './comments/comments.component';
+import { UsersComponent } from './users/users.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +33,9 @@ import { ProductsComponent } from './products/products.component';
     LoginComponent,
     CartComponent,
     ProductsComponent,
+    PromotionsComponent,
+    CommentsComponent,
+    UsersComponent,
   ],
   imports: [
     BrowserModule,
