@@ -6,6 +6,7 @@ import {ProfileComponent} from "./profile/profile.component";
 import {ProductDetailsComponent} from "./product-details/product-details.component";
 import {LoginComponent} from "./login/login.component";
 import {CartComponent} from "./cart/cart.component";
+import {ProductsComponent} from "./products/products.component";
 
 
 
@@ -15,6 +16,7 @@ const routes: Routes = [
   {path: 'details/:id', component: ProductDetailsComponent},
   {path: 'login', component: LoginComponent},
   {path: 'cart', component: CartComponent},
+  {path: 'products', component: ProductsComponent},
 
 
 ];

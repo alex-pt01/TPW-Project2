@@ -19,6 +19,7 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatAutocomplete} from "@angular/material/autocomplete";
 import { LoginComponent } from './login/login.component';
 import { CartComponent } from './cart/cart.component';
+import { ProductsComponent } from './products/products.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,7 @@ import { CartComponent } from './cart/cart.component';
     ProductDetailsComponent,
     LoginComponent,
     CartComponent,
-
+    ProductsComponent,
   ],
   imports: [
     BrowserModule,
