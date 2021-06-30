@@ -82,22 +82,41 @@ export class DRFService {
       condition: 'New',
       stock: product.stock,
       quantity: product.quantity,
-      promotion: product.promotion.id,
+      promotion: product.promotion.id
     }
     const formData: FormData = new FormData();
     formData.append("image",product.image);
     formData.append("data", JSON.stringify(f))
-    confirm(JSON.stringify(product.image))
-    let ans = this.http.post(url, f, this.httpOptions);
-    alert(ans)
-    return ans
+
+    return  this.http.post(url, f, this.httpOptions);
   }
+
   updateProduct(product: Product): Observable<any>{
     const url = this.BASE_URL +'productup/'+product.id;
+
+    let f  = {
+      id: product.id,
+      name: product.name,
+      description: product.description,
+      brand: product.brand,
+      seller:product.seller,
+      price: product.price,
+      category: product.category,
+      condition: product.condition,
+      stock: product.stock,
+      quantity: product.quantity,
+      promotion: product.promotion
+    }
+
+    const formData: FormData = new FormData();
+    formData.append("image",product.image);
+    formData.append("data", JSON.stringify(f))
+
     return this.http.put(url, product, this.httpOptions);
   }
-  deleteProduct(product: Product): Observable<any>{
-    const url = this.BASE_URL +'productdel/'+product.id;
+
+  deleteProduct(productId: number): Observable<any>{
+    const url = this.BASE_URL +'productdel/'+productId;
     return this.http.delete<Product>(url, this.httpOptions);
   }
 
