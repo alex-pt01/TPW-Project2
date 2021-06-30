@@ -24,14 +24,11 @@ import { PromotionsComponent } from './promotions/promotions.component';
 import { CommentsComponent } from './comments/comments.component';
 import { UsersComponent } from './users/users.component';
 import { HomeComponent } from './home/home.component';
-<<<<<<< HEAD
 import {NgbCarouselModule} from "@ng-bootstrap/ng-bootstrap";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-=======
-import { SoldComponent } from './sold/sold.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { SoldComponent } from './sold/sold.component';
 import { RegisterComponent } from './register/register.component';
->>>>>>> 5b8087f4d93d1e49fdadb9ffa314e7f6bb6fc5f4
 
 @NgModule({
   declarations: [
@@ -46,11 +43,8 @@ import { RegisterComponent } from './register/register.component';
     CommentsComponent,
     UsersComponent,
     HomeComponent,
-<<<<<<< HEAD
-=======
     SoldComponent,
     RegisterComponent,
->>>>>>> 5b8087f4d93d1e49fdadb9ffa314e7f6bb6fc5f4
   ],
   imports: [
     BrowserModule,
@@ -63,11 +57,8 @@ import { RegisterComponent } from './register/register.component';
     MatSelectModule,
     MatCheckboxModule,
     FormsModule,
-<<<<<<< HEAD
     NgbCarouselModule,
-=======
     FontAwesomeModule,
->>>>>>> 5b8087f4d93d1e49fdadb9ffa314e7f6bb6fc5f4
 
   ],
   providers: [DRFService],
