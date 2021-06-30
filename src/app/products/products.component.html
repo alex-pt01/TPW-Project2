@@ -104,7 +104,7 @@
               </option>
             </select>
           </div>
-          <input type="submit" (click)="update()"  class="btn btn-default check_out" value="Save"/>
+          <input type="submit" *ngIf="currentProduct" (click)="update()"  class="btn btn-default check_out" value="Save"/>
           <input type="submit"  (click)="create()" class="btn btn-default check_out" value="Create New"/>
         </form>
 

@@ -28,10 +28,21 @@ export class DRFService {
     const url = this.BASE_URL + 'login';
     this.httpOptions = {
       headers: new HttpHeaders({'Content-Type':'application/json'})}
-    alert(inUser + inPass)
+
     let answer = this.http.post<User>(url, {username: inUser, password:inPass}, this.httpOptions)
 
     return answer
+  }
+  register(username: string, password: string , email:string): Observable<any> {
+    const url = this.BASE_URL + 'signup';
+    let f={
+      username:username,
+      email:email,
+      password:password
+    }
+    this.httpOptions = {
+      headers: new HttpHeaders({'Content-Type':'application/json'})}
+    return this.http.post(url,f, this.httpOptions )
   }
 
   profile(): Observable<User>{

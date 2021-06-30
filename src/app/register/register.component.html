@@ -5,13 +5,14 @@
                      ">
   <div class="login-form"  ><!--login form-->
     <h2>Login to your account</h2>
-    <form method="post" *ngIf="loginForm" [formGroup]="loginForm" (ngSubmit)="login()">
+    <form method="post" *ngIf="registerForm" [formGroup]="registerForm" (ngSubmit)="register()">
       <input formControlName="username" type="text" placeholder="Username" />
       <input formControlName="password" name="pass" type="password" placeholder="Password" />
-      <a style="float:left;" routerLink="/register"> Don't have an account? Register</a>
+      <input formControlName="email" type="email" placeholder="Email" />
+      <a style="float:left;" routerLink="/register"> Already have an account? Login</a>
 
 
-      <button style="float:right;" type="submit" class="btn btn-default" value="Login">Login</button>
+      <button style="float:right;" type="submit" class="btn btn-default" value="SignUp">Signup</button>
 
     </form>
   </div><!--/login form-->

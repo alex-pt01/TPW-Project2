@@ -5,6 +5,7 @@ import {DRFService} from "../Services/drf.service";
 import {ActivatedRoute, Params} from "@angular/router";
 import {identity} from "rxjs";
 import {HttpParams} from "@angular/common/http";
+import { faStar, faStarHalf, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-product-details',
@@ -18,6 +19,10 @@ export class ProductDetailsComponent implements OnInit {
   id: string = '';
   sum: number = 0;
   comments= Array<Comment>();
+
+  faStar = faStar;
+  faStarHalf = faStarHalf;
+  faCart = faShoppingCart;
   constructor(private route: ActivatedRoute, private service: DRFService ) {
 
   }

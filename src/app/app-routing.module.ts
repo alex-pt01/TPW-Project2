@@ -11,6 +11,7 @@ import {PromotionsComponent} from "./promotions/promotions.component";
 import {CommentsComponent} from "./comments/comments.component";
 import {UsersComponent} from "./users/users.component";
 import {HomeComponent} from "./home/home.component";
+import {RegisterComponent} from "./register/register.component";
 
 
 
@@ -25,6 +26,7 @@ const routes: Routes = [
   {path: 'comments', component: CommentsComponent},
   {path: 'users', component: UsersComponent},
   {path: 'home', component: HomeComponent},
+  {path: 'register', component: RegisterComponent},
 
 
 ];

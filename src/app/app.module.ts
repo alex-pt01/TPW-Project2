@@ -24,6 +24,9 @@ import { PromotionsComponent } from './promotions/promotions.component';
 import { CommentsComponent } from './comments/comments.component';
 import { UsersComponent } from './users/users.component';
 import { HomeComponent } from './home/home.component';
+import { SoldComponent } from './sold/sold.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +41,8 @@ import { HomeComponent } from './home/home.component';
     CommentsComponent,
     UsersComponent,
     HomeComponent,
+    SoldComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,6 +55,7 @@ import { HomeComponent } from './home/home.component';
     MatSelectModule,
     MatCheckboxModule,
     FormsModule,
+    FontAwesomeModule,
 
   ],
   providers: [DRFService],

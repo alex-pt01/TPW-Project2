@@ -8,7 +8,7 @@
       </div>
     <!-- card right -->
     <div class = "product-content">
-      <h2 class = "product-title">{{product.name}}</h2>
+      <h2 >{{product.name}}</h2>
       <a class = "product-link">{{product.brand}}</a>
       <div class = "product-rating">
         <i class = "fas fa-star"></i>
@@ -59,8 +59,8 @@
 
 
                 <h3 *ngFor="let a of c.stars" >
-                  <i *ngIf="a==1" class = "fas fa-star"></i>
-                  <i *ngIf="a==0" class = "fas fa-star-half-alt"></i>
+                  <i *ngIf="a==1" ><fa-icon [icon]="faStar"></fa-icon></i>
+                  <i *ngIf="a==0" ><fa-icon [icon]="faStarHalf"></fa-icon></i>
                 </h3>
 
 

@@ -39,12 +39,23 @@ export class ProductsComponent implements OnInit {
   getProducts(): void{
     this.service.getProducts().subscribe((pr: Product[])=>
     {
-      this.products = pr;
+      this.service.profile().subscribe((user:User)=>{
+        this.user=user;
+        this.createForm()
+        if (!this.user.is_superuser){
+          for(let p of pr){
+            if(p.seller==user.username)
+              this.products.push(p)
+          }
+        }
+        else
+          this.products = pr;
+      })
     })
   }
+
   createForm(): void{
-    this.service.profile().subscribe((pr: User)=> {
-      this.user=pr;
+
       this.service.getPromotions().subscribe((promos: Promotion[])=>{
         this.PROMOTIONS = promos;
         this.productForm = new FormGroup({
@@ -80,7 +91,7 @@ export class ProductsComponent implements OnInit {
         });
       });
 
-    });
+
 
   }
 
