@@ -15,18 +15,15 @@ import {Promotion} from "../Models/Promotion";
 export class ProductsComponent implements OnInit {
   products = Array<Product>();
   productForm: FormGroup | null = null;
-  updateForm: FormGroup | null = null;
-
-  user: User|null = null;
+  currentPromotion: Promotion | null = null;
   CATEGORY =['Smartphones','Computers','Tablets','Drones', 'Televisions']
   PROMOTIONS = Array<Promotion>();
   currentProduct: Product |null = null;
-  selectedFile: File | null = null;
+  selectedFile: string | ArrayBuffer | null = null;
 
 
   constructor( private formbuilder: FormBuilder,
                private service: DRFService,
-               private router: Router
   ) {
   }
 
@@ -40,12 +37,21 @@ export class ProductsComponent implements OnInit {
   getProducts(): void{
     this.service.getProducts().subscribe((pr: Product[])=>
     {
+
+    this.createForm()
+    if (this.service.user && !this.service.user.is_superuser){
+      for(let p of pr){
+        if(p.seller==this.service.user.username)
+          this.products.push(p)
+      }
+    }
+    else
       this.products = pr;
-    })
+  })
   }
+
   createForm(): void{
-    this.service.profile().subscribe((pr: User)=> {
-      this.user=pr;
+
       this.service.getPromotions().subscribe((promos: Promotion[])=>{
         this.PROMOTIONS = promos;
         this.productForm = new FormGroup({
@@ -81,60 +87,66 @@ export class ProductsComponent implements OnInit {
         });
       });
 
-    });
+
 
   }
 
 
   createUpdateForm(product: Product): void{
       this.currentProduct = product;
-      this.updateForm = new FormGroup({
-        name: new FormControl('', [
-          Validators.required
-        ]),
-        price: new FormControl('', [
-          Validators.required,
-          Validators.min(0)]),
-        description: new FormControl('', [
-          Validators.required,
-          Validators.minLength(6),
-        ]),
-        quantity: new FormControl('', [
-          Validators.required,
-          Validators.min(0)
-        ]),
-        image: new FormControl('', [
-
-        ]),
-        brand: new FormControl('', [
-          Validators.required,
-        ]),
-        category:new FormControl('', [
-          Validators.required,
-        ]),
-        condition:new FormControl('', [
-          Validators.required,
-        ]),
-        promotion:new FormControl('', [
-        ]),
-
-      });
-
-
   }
+
   update():void{
 
+
+    if (this.productForm  && this.selectedFile && this.currentProduct && this.service.user){
+      alert(this.currentProduct.id)
+      let p = new Product(this.currentProduct.id, this.productForm.controls['name'].value,this.productForm.controls['price'].value,
+        this.productForm.controls['description'].value, this.selectedFile,this.productForm.controls['quantity'].value,this.productForm.controls['brand'].value,
+        this.service.user.username, this.productForm.controls['category'].value, this.productForm.controls['condition'].value,
+      )
+      if(this.productForm.controls['promotion'].value){
+        p.promotion=this.productForm.controls['promotion'].value
+
+      }
+
+
+      this.service.updateProduct(p).subscribe((_)=>{
+        alert('Product Updated')
+      });
+    }
   }
 
   onFileChanged(event: any): void{
-    this.selectedFile = event.target.files[0]
+    const reader = new FileReader();
+
+    if (event.target.files && event.target.files.length) {
+      const [file] = event.target.files;
+      reader.readAsDataURL(file);
+
+      reader.onload = () => {
+
+        this.selectedFile = reader.result
+
+
+      };
+
+    }
   }
 
   create(): void{
-    if (this.productForm && this.user && this.selectedFile){
+    if (this.productForm && this.service.user && this.selectedFile){
+
       let p = new Product(null, this.productForm.controls['name'].value,this.productForm.controls['price'].value,
         this.productForm.controls['description'].value, this.selectedFile,this.productForm.controls['quantity'].value,this.productForm.controls['brand'].value,
-        this.user.username, this.productForm.controls['category'].value, this.productForm.controls['condition'].value, this.productForm.controls['promotion'].value)
+        this.service.user.username, this.productForm.controls['category'].value, this.productForm.controls['condition'].value,
+        )
+      if(this.productForm.controls['promotion'].value){
+        p.promotion=this.productForm.controls['promotion'].value
+        alert(p.promotion.name)
+      }
+
+
       this.service.createProduct(p).subscribe((_)=>{
         alert('Product Created')
       });

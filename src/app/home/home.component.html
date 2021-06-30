@@ -1,9 +1,5 @@
-
-
-<!--CATEGORIES-->
-<!-- carousel -->
 <div>
-  <img src="assets/images/drone.jpg" >
+  <img src="assets/images/drone.png" >
 
 </div>
 
@@ -24,8 +20,8 @@
           <a class="price" *ngIf="product.promotion" style="text-decoration: line-through">{{ product.price }} €</a>
           <a class="price" *ngIf="product.promotion">{{ product.price- product.price*product.promotion.discount }} €</a>
           <a class="price" *ngIf="product.promotion == null">{{ product.price }} €</a>
-          <a *ngIf="product.quantity!=0" (click)="addToCart(product)" class="add-to-cart" type="submit" ><i class="fa fa-shopping-cart"><span class="add-to-cart" style="font-family: Roboto, sans-serif">Add To Cart</span></i></a>
-          <a *ngIf="product.quantity==0" type="submit" > <span class="not-in-stock">Not In Stock</span></a>
+          <a *ngIf="product.quantity!=0"  > <span class="not-in-stock">Stock</span></a>
+          <a *ngIf="product.quantity==0"  > <span class="not-in-stock">Not In Stock</span></a>
         </p>
 
 
@@ -34,110 +30,80 @@
 
   </div>
 
+  <br><br><br>
+  <h2 style="font-size: 20px;" class="title text-center">Comments </h2>
+  <div class="row "  >
+    <div class="col-sm-12"   >
+
+
+      <p></p>
+      <table class="styled-table" style="margin: 0 auto; width: 1000px; height: 400px;  border: solid black 2px;">
+        <tr style="background-color: steelblue; color:white">
+          <th>UserName</th>
+          <th>Email</th>
+          <th>Description</th>
+          <th>Rating</th>
+          <th>commentDate</th>
+          <th>ProductName</th>
+
+        </tr>
+
+        <tr *ngFor="let comment of
+           comments">
+          <th >{{ comment.userName }}</th>
+          <th >{{ comment.userEmail }}</th>
+          <th >{{ comment.description }}</th>
+          <th >{{ comment.rating }}</th>
+          <th >{{ comment.commentDate }}</th>
+          <th *ngIf="comment.product">{{ comment.product.name }}</th>
+          <th *ngIf="!comment.product">-------</th>
+
+
+        </tr>
+      </table>
+    </div>
+  </div>
+  <br><br><br>
+  <h2 style="font-size: 20px;" class="title text-center">Add Comment </h2>
+
+  <div style="width:40%; margin-left: 5%; margin-right: 5%; ">
+
+    <div *ngIf="commentForm " style="margin-right: 20%; margin-left: 20%" >
+      <form id="form-box"  method="post" (ngSubmit)="create()" [formGroup]="commentForm"  >
+
+
+        <div class="form-header">Create Promotion</div>
+        <div>
+          <p *ngIf="commentForm.controls['userName'].invalid" style="color:red">Insert your name</p>
+          <input formControlName="userName" type="text" class="form-input"/>
+          <br>
+          <p *ngIf="commentForm.controls['userEmail'].invalid" style="color:red">Insert your email</p>
+          <input formControlName="userEmail" type="text" class="form-input"/>
+          <br>
+          <p *ngIf="commentForm.controls['description'].invalid" style="color:red">Insert a Description</p>
+          <input formControlName="description" type="text" class="form-input"/>
+          <br>
+          <p *ngIf="commentForm.controls['rating'].invalid" style="color:red">Insert a product rating</p>
+          <input formControlName="rating" type="number" class="form-input"/>
+          <br>
+          <p *ngIf="commentForm.controls['commentDate'].invalid" style="color:red">Insert a comment date</p>
+          <input formControlName="commentDate" type="date" class="form-input"/>
+          <br>
+          <div class="form-header">Promotion</div>
+          <select formControlName="product" style="width:30%; margin-right: 10px">
+            <option>-------</option>
+            <option *ngFor="let p of PRODUCTS">
+              {{p.name}}
+            </option>
+          </select>
+        </div>
+        <input type="submit"   class="btn btn-default check_out" value="Save"/>
+      </form>
+
+    </div>
+
+  </div>
+
 
 
 </div>
-
-
-
-    <!--REVIEWS
-    <div class="col-sm-12 padding-right">    <br><br>    <br><br>
-
-      <div class="features_items" >
-        <h2 class="title text-center">Store Reviews</h2>
-        {%  for comment in comments %}
-        <div  >
-          <div class="product-image-wrapper col-sm-4">
-            <div class="single-products">
-              <div class="productinfo text-center" style="border: #2a6496; border-style: solid;">
-                <h2>{{ comment.userName }} </h2>
-                <label>Description</label>
-                <p>{{ comment.description }}</p>
-                <label>Date</label>
-                <p>{{ comment.commentDate }}</p>
-                <label>Rating</label>
-                <br>
-                {% if comment.rating == 0 %}
-                <i class="fas fa-star-o" style="font-family: FontAwesome"></i>
-                <i class="fas fa-star-o" style="font-family: FontAwesome"></i>
-                <i class="fas fa-star-o" style="font-family: FontAwesome"></i>
-                <i class="fas fa-star-o" style="font-family: FontAwesome"></i>
-                <i class="fas fa-star-o" style="font-family: FontAwesome"></i>
-
-                {% elif comment.rating == 1 %}
-                <i class="fas fa-star" style="font-family: FontAwesome"></i>
-                <i class="fas fa-star-o" style="font-family: FontAwesome"></i>
-                <i class="fas fa-star-o" style="font-family: FontAwesome"></i>
-                <i class="fas fa-star-o" style="font-family: FontAwesome"></i>
-                <i class="fas fa-star-o" style="font-family: FontAwesome"></i>
-
-                {% elif comment.rating == 2 %}
-                <i class="fas fa-star" style="font-family: FontAwesome"></i>
-                <i class="fas fa-star" style="font-family: FontAwesome"></i>
-                <i class="fas fa-star-o" style="font-family: FontAwesome"></i>
-                <i class="fas fa-star-o" style="font-family: FontAwesome"></i>
-                <i class="fas fa-star-o" style="font-family: FontAwesome"></i>
-
-                {% elif comment.rating == 3 %}
-                <i class="fas fa-star" style="font-family: FontAwesome"></i>
-                <i class="fas fa-star" style="font-family: FontAwesome"></i>
-                <i class="fas fa-star" style="font-family: FontAwesome"></i>
-                <i class="fas fa-star-o" style="font-family: FontAwesome"></i>
-                <i class="fas fa-star-o" style="font-family: FontAwesome"></i>
-
-                {% elif comment.rating == 4 %}
-                <i class="fas fa-star" style="font-family: FontAwesome"></i>
-                <i class="fas fa-star" style="font-family: FontAwesome"></i>
-                <i class="fas fa-star" style="font-family: FontAwesome"></i>
-                <i class="fas fa-star" style="font-family: FontAwesome"></i>
-                <i class="fas fa-star-o" style="font-family: FontAwesome"></i>
-
-                {% elif comment.rating == 5 %}
-                <i class="fas fa-star" style="font-family: FontAwesome"></i>
-                <i class="fas fa-star" style="font-family: FontAwesome"></i>
-                <i class="fas fa-star" style="font-family: FontAwesome"></i>
-                <i class="fas fa-star" style="font-family: FontAwesome"></i>
-                <i class="fas fa-star" style="font-family: FontAwesome"></i>
-                {% endif %}
-
-              </div>
-            </div>
-          </div>
-          {% endfor %}
-        </div>
-      </div>-->
-      <!--ADD REVIEWS
-      <div class="row">
-        <div class="col-md-4 col-md-offset-4">
-          <div class="login-form">
-            <h2 class="title text-center">Add Review</h2>
-            <form method="POST" action=".">
-              {% csrf_token %}
-              {{ form}}
-              <br><br>
-              <button style="float:right;" type="submit" class="btn btn-default">Add</button>
-            </form>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-  </div>
-
-</section>-->
-<br><br>
-<br><br>
-<footer id="footer"><!--Footer-->
-
-  <div class="footer-bottom">
-    <div class="container">
-      <div class="row">
-        <p class="pull-left">Copyright © 2021 TechOn . All rights reserved.</p>
-        <p class="pull-right">TPW Project</p>
-      </div>
-    </div>
-  </div>
-
-</footer>
-

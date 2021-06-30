@@ -5,10 +5,14 @@
       <!--SHOW PRODUCTS-->
 
       <form class="example-form" (ngSubmit)="searchRemoveAll()">
-
+        <div>Search</div>
         <input id="name" type="text" [formControl]="query">
+
+        <hr>
+        <div>Price Range</div>
+        <p><input style="margin:5px" type="number" [(ngModel)]="priceRange[0]" [formControl]="minPrice"><input type="number" style="margin:5px" [(ngModel)]="priceRange[1]" [formControl]="maxPrice"></p>
         <input type="submit">
-    </form>
+      </form>
   <hr/>
       <p><mat-form-field appearance="fill">
         <mat-label>Category</mat-label>
@@ -64,6 +68,7 @@
       </mat-select>
     </mat-form-field>
   </p>
+
 
 
 

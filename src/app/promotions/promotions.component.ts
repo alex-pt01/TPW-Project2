@@ -4,6 +4,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Promotion} from "../Models/Promotion";
 import {User} from "../Models/User";
 import {Router} from "@angular/router";
+import {Product} from "../Models/Product";
 
 @Component({
   selector: 'app-promotions',
@@ -15,6 +16,7 @@ export class PromotionsComponent implements OnInit {
   promotionForm: FormGroup | null = null;
   user: User|null = null;
   updateForm: FormGroup | null = null;
+  currentPromotion: Promotion |null = null;
 
   constructor(private formbuilder: FormBuilder,
               private service: DRFService,
@@ -23,6 +25,8 @@ export class PromotionsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getPromotions();
+    this.createForm();
+
   }
 
   getPromotions(): void{
@@ -71,6 +75,25 @@ export class PromotionsComponent implements OnInit {
       })
 
   }
+
+  createUpdateForm(promotion: Promotion): void{
+    this.currentPromotion = promotion;
+  }
+
+  update():void{
+
+
+    if (this.promotionForm && this.user && this.currentPromotion){
+      alert(this.currentPromotion.id)
+      let p = new Promotion(this.currentPromotion.id, this.promotionForm.controls['name'].value, this.promotionForm.controls['discount'].value, this.promotionForm.controls['description'].value)
+
+      this.service.updatePromotion(p).subscribe((_)=>{
+        alert('Promotion Updated')
+      });
+    }
+  }
+
+
 
 
 }

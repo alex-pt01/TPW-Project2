@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Product} from "../Models/Product";
 import {DRFService} from "../Services/drf.service";
 import {min} from "rxjs/operators";
-import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-search',
@@ -30,6 +30,8 @@ export class SearchComponent implements OnInit {
   brand="All";
   seller="All";
   query = new FormControl("");
+  minPrice = new FormControl("", [Validators.min(0)]);
+  maxPrice = new FormControl("",Validators.min(0));
   priceRange =[0,20000];
   inStock = "All";
   inPromotion="All";
@@ -73,7 +75,7 @@ export class SearchComponent implements OnInit {
       this.allProducts = pr;
       this.products = pr;
       for (let i = 0; i < this.products.length; i++) {
-        if(this.products[i].promotion){
+        if(this.products[i].promotion!=null){
           this.promotions.push(this.products[i].promotion.name)
         }
       }

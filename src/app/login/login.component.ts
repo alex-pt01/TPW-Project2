@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {DRFService} from "../Services/drf.service";
 import {Product} from "../Models/Product";
 import {User} from "../Models/User";
 import {Router, RouterModule} from "@angular/router";
 import {HttpHeaders} from "@angular/common/http";
+import {AppComponent} from "../app.component";
 
 @Component({
   selector: 'app-login',
@@ -13,9 +14,7 @@ import {HttpHeaders} from "@angular/common/http";
 })
 export class LoginComponent implements OnInit {
 
-  username= new FormControl('');
-  password= new FormControl('');
-
+  loginForm: FormGroup | null = null;
 
 
 
@@ -25,20 +24,27 @@ export class LoginComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.loginForm = new FormGroup({
+      username: new FormControl('', [
+        Validators.required,
+      ]),
+      password: new FormControl('', [
+        Validators.required,
+      ])
+    });
   }
 
   login(): void{
-    if (this.username.value && this.password.value){
-      this.drf.login(this.username.value, this.password.value).subscribe((u: User)=> {
+    if (this.loginForm){
+      this.drf.login(this.loginForm.controls['username'].value, this.loginForm.controls['password'].value).subscribe((u: User)=> {
         this.drf.user = u;
         localStorage.setItem('TOKEN', u.token)
-        alert(u.token)
+
+
         this.router.navigate(['/shop']);
+
       });
     }
-
-
-
   }
 
 }

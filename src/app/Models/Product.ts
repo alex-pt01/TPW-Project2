@@ -8,16 +8,16 @@ export class Product {
   price: number;
   description: string;
   stock: boolean = false;
-  image: string | File;
+  image: string | ArrayBuffer;
   quantity: number;
   brand: string;
   seller: string = '';
   category : string = '';
-  promotion : Promotion = new Promotion(null, '', 0, '');
+  promotion : Promotion  = new Promotion(null, '', 0, '');
   date: Date = new Date();
   condition: string = '';
 
-  constructor(id: number | null, name: string, price: number, description: string, image: string | File, quantity: number, brand: string, seller: string, category: string, condition: string, promotion: Promotion, date?: Date) {
+  constructor(id: number | null, name: string, price: number, description: string, image: string | ArrayBuffer, quantity: number, brand: string, seller: string, category: string, condition: string, promotion?: Promotion, date?: Date) {
     this.id = id;
     this.name = name;
     this.price = price;
@@ -32,7 +32,10 @@ export class Product {
     this.brand = brand;
     this.seller = seller;
     this.category = category;
-    this.promotion = promotion;
+    if (promotion)
+      this.promotion  = promotion
+    else
+      this.promotion = new Promotion(null, '', 0, '');
     this.condition = condition;
     if (date){
       this.date = date
@@ -43,14 +46,7 @@ export class Product {
     return new Product(-99,'',0,'','',0,'','','','',Promotion.newPromotion());
   }
 
-  /*conditions = (('New', 'New'), ('Used', 'Used'))*/
-  /*
-  CATEGORY = (('Smartphones', 'Smartphones'),
-    ('Computers', 'Computers'),
-    ('Tablets', 'Tablets'),
-    ('Drones', 'Drones')
-    , ('Televisions', 'Televisions'))
-   */
+
 
 
 }

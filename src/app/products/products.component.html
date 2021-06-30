@@ -9,7 +9,7 @@
 
 
         <p></p>
-        <table class="styled-table" style="border: solid black 2px;">
+        <table class="styled-table" style="margin: 0 auto; width:100%; border: solid black 2px;">
           <tr style="background-color: darkorange; color:white">
             <th>Name</th>
             <th>Price</th>
@@ -50,27 +50,33 @@
     <div style="width:40%; margin-left: 5%; margin-right: 5%; ">
 
       <div *ngIf="productForm " style="margin-right: 20%; margin-left: 20%" >
-        <form id="form-box"  method="post" (ngSubmit)="create()" [formGroup]="productForm"  >
+        <form id="form-box"  method="post"  [formGroup]="productForm"  >
 
 
           <div class="form-header">Create Product</div>
           <div>
             <p *ngIf="productForm.controls['name'].invalid" style="color:red">Insert a name for the Product</p>
-            <input formControlName="name" type="text" class="form-input"/>
+            <input formControlName="name" type="text" *ngIf="currentProduct" [(ngModel)]="currentProduct.name" class="form-input"/>
+            <input formControlName="name" type="text" *ngIf="!currentProduct"  class="form-input"/>
             <br>
             <p *ngIf="productForm.controls['description'].invalid" style="color:red">Insert a Description</p>
-            <input formControlName="description" type="text" class="form-input"/>
+            <input formControlName="description" *ngIf="currentProduct" [(ngModel)]="currentProduct.description"  type="text" class="form-input"/>
+            <input formControlName="description" *ngIf="!currentProduct" type="text" class="form-input"/>
 
             <p *ngIf="productForm.controls['brand'].invalid" style="color:red">Insert a brand for the Product</p>
-            <input formControlName="brand" type="text" class="form-input"/>
+            <input formControlName="brand" *ngIf="currentProduct" [(ngModel)]="currentProduct.brand"  type="text" class="form-input"/>
+            <input formControlName="brand" *ngIf="!currentProduct" type="text" class="form-input"/>
 
             <p *ngIf="productForm.controls['quantity'].invalid" style="color:red">Insert a Quantity for the Product</p>
-            <input formControlName="quantity" type="number" class="form-input"/>
+            <input formControlName="quantity"  *ngIf="currentProduct" [(ngModel)]="currentProduct.quantity" type="number" class="form-input"/>
+            <input formControlName="quantity" *ngIf="!currentProduct" type="number" class="form-input"/>
             <p *ngIf="productForm.controls['price'].invalid" style="color:red">Insert a Price</p>
-            <input formControlName="price" type="number" class="form-input"/>
+            <input formControlName="price" *ngIf="currentProduct" [(ngModel)]="currentProduct.price"  type="number" class="form-input"/>
+            <input formControlName="price" *ngIf="!currentProduct" type="number" class="form-input"/>
 
 
             <input formControlName="image"  (change)="onFileChanged($event)" type="file" class="form-input"/>
+
             <p *ngIf="productForm.controls['category'].invalid" style="color:red">Insert a name for the Product</p>
             <div class="form-header">Category</div>
             <select formControlName="category" style="width:30%; margin-right: 10px">
@@ -80,11 +86,13 @@
             </select>
 
             <div class="form-header">Promotion</div>
-            <select formControlName="promotion" style="width:30%; margin-right: 10px">
-              <option>-------</option>
-              <option *ngFor="let c of PROMOTIONS">
-                {{c.name}}
-              </option>
+            <select  formControlName="promotion" style="width:30%; margin-right: 10px">
+
+                <option *ngFor="let c of PROMOTIONS" [ngValue]="c">
+                  {{c.name}}
+                </option>
+
+
             </select>
             <div class="form-header">Condition</div>
             <select formControlName="condition" style="width:30%; margin-right: 10px">
@@ -96,66 +104,8 @@
               </option>
             </select>
           </div>
-          <input type="submit"   class="btn btn-default check_out" value="Save"/>
-        </form>
-
-      </div>
-
-    </div>
-
-  </div>
-  <div>
-    <div style="width:40%; margin-left: 5%; margin-right: 5%; ">
-
-      <div *ngIf="updateForm " style="margin-right: 20%; margin-left: 20%" >
-        <form method="post" (ngSubmit)="update()" [formGroup]="updateForm"  >
-
-
-          <div class="form-header">Create Product</div>
-          <div>
-            <p *ngIf="updateForm.controls['name'].invalid" style="color:red">Insert a name for the Product</p>
-            <input formControlName="name" type="text" class="form-input"/>
-            <br>
-            <p *ngIf="updateForm.controls['description'].invalid" style="color:red">Insert a Description</p>
-            <input formControlName="description" type="text" class="form-input"/>
-
-            <p *ngIf="updateForm.controls['brand'].invalid" style="color:red">Insert a brand for the Product</p>
-            <input formControlName="brand" type="text" class="form-input"/>
-
-            <p *ngIf="updateForm.controls['quantity'].invalid" style="color:red">Insert a Quantity for the Product</p>
-            <input formControlName="quantity" type="number" class="form-input"/>
-            <p *ngIf="updateForm.controls['price'].invalid" style="color:red">Insert a Price</p>
-            <input formControlName="price" type="number" class="form-input"/>
-
-
-            <input formControlName="image"  (change)="onFileChanged($event)" type="file" class="form-input"/>
-            <p *ngIf="updateForm.controls['category'].invalid" style="color:red">Choose a Product Category</p>
-            <div class="form-header">Category</div>
-            <select formControlName="category" style="width:30%; margin-right: 10px">
-              <option *ngFor="let c of CATEGORY">
-                {{c}}
-              </option>
-            </select>
-
-            <div class="form-header">Promotion</div>
-            <select formControlName="promotion" style="width:30%; margin-right: 10px">
-              <option>-------</option>
-              <option *ngFor="let c of PROMOTIONS">
-                {{c.name}}
-              </option>
-            </select>
-            <p *ngIf="updateForm.controls['condition'].invalid" style="color:red">Choose a Product Condition</p>
-            <div class="form-header">Condition</div>
-            <select formControlName="condition" style="width:30%; margin-right: 10px">
-              <option value="New">
-                New
-              </option>
-              <option value="Used">
-                Used
-              </option>
-            </select>
-          </div>
-          <input type="submit"   class="btn btn-default check_out" value="Save"/>
+          <input type="submit" *ngIf="currentProduct" (click)="update()"  class="btn btn-default check_out" value="Save"/>
+          <input type="submit"  (click)="create()" class="btn btn-default check_out" value="Create New"/>
         </form>
 
       </div>

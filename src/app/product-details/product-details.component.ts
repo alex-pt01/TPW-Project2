@@ -6,6 +6,7 @@ import {ActivatedRoute, Params} from "@angular/router";
 import {identity} from "rxjs";
 import {HttpParams} from "@angular/common/http";
 
+
 @Component({
   selector: 'app-product-details',
   templateUrl: './product-details.component.html',
@@ -18,6 +19,7 @@ export class ProductDetailsComponent implements OnInit {
   id: string = '';
   sum: number = 0;
   comments= Array<Comment>();
+
   constructor(private route: ActivatedRoute, private service: DRFService ) {
 
   }
