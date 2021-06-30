@@ -22,6 +22,7 @@ import { CartComponent } from './cart/cart.component';
 import { ProductsComponent } from './products/products.component';
 import { PromotionsComponent } from './promotions/promotions.component';
 import { CommentsComponent } from './comments/comments.component';
+import { UsersComponent } from './users/users.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { CommentsComponent } from './comments/comments.component';
     ProductsComponent,
     PromotionsComponent,
     CommentsComponent,
+    UsersComponent,
   ],
   imports: [
     BrowserModule,

@@ -152,6 +152,17 @@ export class DRFService {
     const url = this.BASE_URL +'promotiondel/'+promotionID;
     return this.http.delete<Product>(url, this.httpOptions);
   }
+  //Users
+
+  getUsers(): Observable<User[]>{
+    const url = this.BASE_URL +'users';
+    return this.http.get<User[]>(url);
+  }
+
+  deleteUser(userID: number): Observable<any>{
+    const url = this.BASE_URL +'userdel/'+userID;
+    return this.http.delete<User>(url, this.httpOptions);
+  }
 
   //Promotions
   getComments(productId: number): Observable<Comment[]>{
