@@ -91,13 +91,18 @@
           <p *ngIf="commentForm.controls['commentDate'].invalid" style="color:red; font-size: 18px">Insert a comment date</p>
           <input formControlName="commentDate" type="date" class="form-input"/>
           <br>
-          <div style="font-size: 18px" class="form-header">Promotion</div>
+          <div style="font-size: 18px" class="form-header">Product</div>
+
+
           <select formControlName="product" style="width:30%; margin-right: 10px">
             <option>-------</option>
             <option *ngFor="let p of PRODUCTS">
               {{p.name}}
             </option>
           </select>
+
+
+
         </div>
         <input style="float: right; font-size: 16px" type="submit"   class="btn btn-default check_out" value="Save"/>
         <br><br>

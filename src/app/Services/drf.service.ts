@@ -196,10 +196,23 @@ export class DRFService {
     const url = this.BASE_URL +'comments';
     return this.http.get<Comment[]>(url);
   }
+
   createComment(comment: Comment): Observable<any>{
     const url = this.BASE_URL +'commentcre';
-    return this.http.post(url, comment, this.httpOptions);
+    let f = {
+      userName: comment.userName,
+      userEmail: comment.userEmail,
+      description: comment.description,
+      rating: comment.rating,
+      commentDate: comment.commentDate,
+      product: comment.product
+
+    }
+    alert(JSON.stringify(f))
+    return this.http.post(url, f, this.httpOptions);
   }
+
+
 
   deleteComment(commentID: number): Observable<any>{
     const url = this.BASE_URL +'commentdel/'+commentID;

@@ -70,17 +70,7 @@ export class CommentsComponent implements OnInit {
     });
   }
 
-  create(): void{
 
-    if (this.commentForm && this.user ){
-      alert('----')
-      let c = new Comment(null, this.commentForm.controls['userName'].value, this.commentForm.controls['userEmail'].value, this.commentForm.controls['description'].value,this.commentForm.controls['rating'].value,this.commentForm.controls['commentDate'].value,this.commentForm.controls['product'].value)
-      this.service.createComment(c).subscribe((_)=>{
-        alert('Comment Created')
-      });
-    }
-
-  }
 
   deleteComment(commentID: number | null): void {
     confirm('Are You Sure Yow Want To Delete This Comment?')

@@ -16,6 +16,9 @@ export class Product {
   promotion : Promotion  = new Promotion(null, '', 0, '');
   date: Date = new Date();
   condition: string = '';
+  toString(): string {
+    return this.name ;
+  }
 
   constructor(id: number | null, name: string, price: number, description: string, image: string | ArrayBuffer, quantity: number, brand: string, seller: string, category: string, condition: string, promotion?: Promotion, date?: Date) {
     this.id = id;
