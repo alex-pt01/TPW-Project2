@@ -50,6 +50,8 @@ export class PromotionsComponent implements OnInit {
         description: new FormControl('', [
           Validators.required,
           Validators.minLength(6),
+        ]),deadline: new FormControl('', [
+          Validators.required,
         ]),
       });
     });
@@ -59,7 +61,7 @@ export class PromotionsComponent implements OnInit {
 
     if (this.promotionForm && this.user ){
       alert('----')
-      let p = new Promotion(null, this.promotionForm.controls['name'].value, this.promotionForm.controls['discount'].value, this.promotionForm.controls['description'].value)
+      let p = new Promotion(null, this.promotionForm.controls['name'].value, this.promotionForm.controls['discount'].value, this.promotionForm.controls['description'].value, this.promotionForm.controls['deadline'].value)
       this.service.createPromotion(p).subscribe((_)=>{
         alert('Promotion Created')
       });

@@ -156,7 +156,14 @@ export class DRFService {
   }
   createPromotion(promotion: Promotion): Observable<any>{
     const url = this.BASE_URL +'promotioncre';
-    return this.http.post(url, promotion, this.httpOptions);
+    let f = {
+      discount: promotion.discount,
+      name: promotion.name,
+      description: promotion.description,
+      deadline: promotion.deadline
+    }
+    alert(JSON.stringify(f))
+    return this.http.post(url, f, this.httpOptions);
   }
   updatePromotion(promotion: Promotion): Observable<any>{
     const url = this.BASE_URL +'promotionup/'+promotion.id;
