@@ -18,6 +18,7 @@ export class ProductsComponent implements OnInit {
   user: User|null = null;
   CATEGORY =['Smartphones','Computers','Tablets','Drones', 'Televisions']
   PROMOTIONS = Array<Promotion>();
+  selectedFile: File | null = null;
   //productGroup: FormGroup;
   constructor( private formbuilder: FormBuilder,
                private service: DRFService,
@@ -67,13 +68,35 @@ export class ProductsComponent implements OnInit {
           category:new FormControl('', [
             Validators.required,
           ]),
+          condition:new FormControl('', [
+            Validators.required,
+          ]),
+          promotion:new FormControl('', [
+           ]),
+
         });
       });
 
     });
 
   }
+  onFileChanged(event: any): void{
+    this.selectedFile = event.target.files[0]
+  }
 
+  create(): void{
+
+    if (this.productForm && this.user && this.selectedFile){
+      alert('----')
+      let p = new Product(null, this.productForm.controls['name'].value,this.productForm.controls['price'].value,
+        this.productForm.controls['description'].value, this.selectedFile,this.productForm.controls['quantity'].value,this.productForm.controls['brand'].value,
+        this.user.username, this.productForm.controls['category'].value, this.productForm.controls['condition'].value, this.productForm.controls['promotion'].value)
+      this.service.createProduct(p).subscribe((_)=>{
+        alert('Product Created')
+      });
+    }
+
+  }
   /*
   addProduct(): void {
     if(this.productGroup ){

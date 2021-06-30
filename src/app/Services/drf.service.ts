@@ -66,9 +66,31 @@ export class DRFService {
     const url = this.BASE_URL +'products';
     return this.http.get<Product[]>(url);
   }
+
   createProduct(product: Product): Observable<any>{
+    this.getToken();
     const url = this.BASE_URL +'productcre';
-    return this.http.post(url, product, this.httpOptions);
+
+
+    let f  = {
+      name: product.name,
+      description: product.description,
+      brand: product.brand,
+      seller:product.seller,
+      price: product.price,
+      category: product.category,
+      condition: 'New',
+      stock: product.stock,
+      quantity: product.quantity,
+      promotion: product.promotion.id,
+    }
+    const formData: FormData = new FormData();
+    formData.append("image",product.image);
+    formData.append("data", JSON.stringify(f))
+    confirm(JSON.stringify(product.image))
+    let ans = this.http.post(url, f, this.httpOptions);
+    alert(ans)
+    return ans
   }
   updateProduct(product: Product): Observable<any>{
     const url = this.BASE_URL +'productup/'+product.id;

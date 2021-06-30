@@ -55,7 +55,7 @@
     <div style="width:40%; margin-left: 5%; margin-right: 5%; ">
 
       <div *ngIf="productForm " style="margin-right: 20%; margin-left: 20%" >
-        <form id="form-box"  [formGroup]="productForm" method="post" >
+        <form id="form-box"  method="post" (ngSubmit)="create()" [formGroup]="productForm"  >
 
 
           <div class="form-header">Create Product</div>
@@ -74,6 +74,8 @@
             <p *ngIf="productForm.controls['price'].invalid" style="color:red">Insert a Price</p>
             <input formControlName="price" type="number" class="form-input"/>
 
+
+            <input formControlName="image"  (change)="onFileChanged($event)" type="file" class="form-input"/>
             <p *ngIf="productForm.controls['category'].invalid" style="color:red">Insert a name for the Product</p>
             <div class="form-header">Category</div>
             <select formControlName="category" style="width:30%; margin-right: 10px">
@@ -83,19 +85,27 @@
             </select>
 
             <div class="form-header">Promotion</div>
-            <select formControlName="category" style="width:30%; margin-right: 10px">
+            <select formControlName="promotion" style="width:30%; margin-right: 10px">
               <option *ngFor="let c of PROMOTIONS">
                 {{c.name}}
               </option>
             </select>
-            <input type="Submit" [disabled]="productForm.invalid"  class="btn btn-default check_out" value="Save">
+            <div class="form-header">Condition</div>
+            <select formControlName="condition" style="width:30%; margin-right: 10px">
+              <option value="New">
+                New
+              </option>
+              <option value="Used">
+              Used
+              </option>
+            </select>
           </div>
 
 
 
 
 
-
+          <input type="submit"   class="btn btn-default check_out" value="Save"/>
         </form>
 
       </div>

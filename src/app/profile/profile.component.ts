@@ -48,6 +48,7 @@ export class ProfileComponent implements OnInit {
     })
   }
   save(): void{
+
     if(this.profileForm && this.user && this.user.id){
       this.service.updateUser(this.user.username, this.profileForm.controls['email'].value,  this.profileForm.controls['password'].value, this.user.id).subscribe(()=>{
         window.location.reload();

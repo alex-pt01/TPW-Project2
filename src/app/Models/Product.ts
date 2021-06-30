@@ -8,7 +8,7 @@ export class Product {
   price: number;
   description: string;
   stock: boolean = false;
-  image: string;
+  image: string | File;
   quantity: number;
   brand: string;
   seller: string = '';
@@ -17,12 +17,17 @@ export class Product {
   date: Date = new Date();
   condition: string = '';
 
-  constructor(id: number | null, name: string, price: number, description: string, image: string, quantity: number, brand: string, seller: string, category: string, condition: string, promotion: Promotion, date?: Date) {
+  constructor(id: number | null, name: string, price: number, description: string, image: string | File, quantity: number, brand: string, seller: string, category: string, condition: string, promotion: Promotion, date?: Date) {
     this.id = id;
     this.name = name;
     this.price = price;
     this.description = description;
-    this.image = this.BASE_URL + image;
+    if(typeof image === "string"){
+      this.image = this.BASE_URL + image;
+    }else{
+      this.image=image;
+    }
+
     this.quantity = quantity;
     this.brand = brand;
     this.seller = seller;
