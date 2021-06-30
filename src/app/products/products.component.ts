@@ -16,7 +16,6 @@ export class ProductsComponent implements OnInit {
   products = Array<Product>();
   productForm: FormGroup | null = null;
   currentPromotion: Promotion | null = null;
-  user: User|null = null;
   CATEGORY =['Smartphones','Computers','Tablets','Drones', 'Televisions']
   PROMOTIONS = Array<Promotion>();
   currentProduct: Product |null = null;
@@ -39,19 +38,17 @@ export class ProductsComponent implements OnInit {
   getProducts(): void{
     this.service.getProducts().subscribe((pr: Product[])=>
     {
-      this.service.profile().subscribe((user:User)=>{
-        this.user=user;
-        this.createForm()
-        if (!this.user.is_superuser){
-          for(let p of pr){
-            if(p.seller==user.username)
-              this.products.push(p)
-          }
-        }
-        else
-          this.products = pr;
-      })
-    })
+
+    this.createForm()
+    if (this.service.user && !this.service.user.is_superuser){
+      for(let p of pr){
+        if(p.seller==this.service.user.username)
+          this.products.push(p)
+      }
+    }
+    else
+      this.products = pr;
+  })
   }
 
   createForm(): void{
@@ -103,11 +100,11 @@ export class ProductsComponent implements OnInit {
   update():void{
 
 
-    if (this.productForm && this.user && this.selectedFile && this.currentProduct){
+    if (this.productForm  && this.selectedFile && this.currentProduct && this.service.user){
       alert(this.currentProduct.id)
       let p = new Product(this.currentProduct.id, this.productForm.controls['name'].value,this.productForm.controls['price'].value,
         this.productForm.controls['description'].value, this.selectedFile,this.productForm.controls['quantity'].value,this.productForm.controls['brand'].value,
-        this.user.username, this.productForm.controls['category'].value, this.productForm.controls['condition'].value,
+        this.service.user.username, this.productForm.controls['category'].value, this.productForm.controls['condition'].value,
       )
       if(this.productForm.controls['promotion'].value){
         p.promotion=this.productForm.controls['promotion'].value
@@ -139,11 +136,11 @@ export class ProductsComponent implements OnInit {
   }
 
   create(): void{
-    if (this.productForm && this.user && this.selectedFile){
+    if (this.productForm && this.service.user && this.selectedFile){
 
       let p = new Product(null, this.productForm.controls['name'].value,this.productForm.controls['price'].value,
         this.productForm.controls['description'].value, this.selectedFile,this.productForm.controls['quantity'].value,this.productForm.controls['brand'].value,
-        this.user.username, this.productForm.controls['category'].value, this.productForm.controls['condition'].value,
+        this.service.user.username, this.productForm.controls['category'].value, this.productForm.controls['condition'].value,
         )
       if(this.productForm.controls['promotion'].value){
         p.promotion=this.productForm.controls['promotion'].value

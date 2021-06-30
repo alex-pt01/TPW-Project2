@@ -5,6 +5,7 @@ import {Product} from "../Models/Product";
 import {User} from "../Models/User";
 import {Router, RouterModule} from "@angular/router";
 import {HttpHeaders} from "@angular/common/http";
+import {AppComponent} from "../app.component";
 
 @Component({
   selector: 'app-login',
@@ -38,8 +39,10 @@ export class LoginComponent implements OnInit {
       this.drf.login(this.loginForm.controls['username'].value, this.loginForm.controls['password'].value).subscribe((u: User)=> {
         this.drf.user = u;
         localStorage.setItem('TOKEN', u.token)
-        alert(u.token)
+
+
         this.router.navigate(['/shop']);
+
       });
     }
   }

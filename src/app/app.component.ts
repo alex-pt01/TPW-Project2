@@ -7,21 +7,17 @@ import {User} from "./Models/User";
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit{
+export class AppComponent{
   title = 'TPW-Project2';
   user: User|null=null;
 
-  constructor(private drfService: DRFService) {
+  constructor(public drfService: DRFService) {
 
   }
   logout(): void{
     localStorage.clear();
+    this.drfService.user=null;
   }
 
-  ngOnInit(): void {
-    if(localStorage.getItem('TOKEN'))
-    this.drfService.profile().subscribe((user:User)=>{
-      this.user=user;
-    })
-  }
+
 }

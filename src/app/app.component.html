@@ -9,7 +9,7 @@
           <a routerLink="/shop" >Products</a>
           <a  routerLink="/cart" >Cart</a>
 
-          <div *ngIf="user && user.is_superuser" class="dropdown">
+          <div *ngIf="drfService.user && drfService.user.is_superuser " class="dropdown">
             <button class="dropbtn" style="color: darkorange">Management
               <i class="fa fa-caret-down"></i>
             </button>
