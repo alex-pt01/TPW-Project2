@@ -23,6 +23,9 @@ import { ProductsComponent } from './products/products.component';
 import { PromotionsComponent } from './promotions/promotions.component';
 import { CommentsComponent } from './comments/comments.component';
 import { UsersComponent } from './users/users.component';
+import { HomeComponent } from './home/home.component';
+import {NgbCarouselModule} from "@ng-bootstrap/ng-bootstrap";
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -36,6 +39,7 @@ import { UsersComponent } from './users/users.component';
     PromotionsComponent,
     CommentsComponent,
     UsersComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,6 +52,7 @@ import { UsersComponent } from './users/users.component';
     MatSelectModule,
     MatCheckboxModule,
     FormsModule,
+    NgbCarouselModule,
 
   ],
   providers: [DRFService],

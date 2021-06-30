@@ -10,6 +10,7 @@ import {ProductsComponent} from "./products/products.component";
 import {PromotionsComponent} from "./promotions/promotions.component";
 import {CommentsComponent} from "./comments/comments.component";
 import {UsersComponent} from "./users/users.component";
+import {HomeComponent} from "./home/home.component";
 
 
 
@@ -23,6 +24,7 @@ const routes: Routes = [
   {path: 'promotions', component: PromotionsComponent},
   {path: 'comments', component: CommentsComponent},
   {path: 'users', component: UsersComponent},
+  {path: 'home', component: HomeComponent},
 
 
 ];
