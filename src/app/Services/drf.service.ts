@@ -3,7 +3,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Product} from "../Models/Product";
 import {Observable} from "rxjs";
 import {Promotion} from "../Models/Promotion";
-import {Review} from "../Models/Comment";
+import {Comment} from "../Models/Comment";
 import {User} from "../Models/User";
 import {identifyDynamicQueryNodes} from "@angular/core/schematics/migrations/dynamic-queries/util";
 import {Sold} from "../Models/Sold";
@@ -148,15 +148,30 @@ export class DRFService {
     const url = this.BASE_URL +'promotionup/'+promotion.id;
     return this.http.put(url, promotion, this.httpOptions);
   }
-  deletePromotion(promotion: Promotion): Observable<any>{
-    const url = this.BASE_URL +'promotiondel/'+promotion.id;
+  deletePromotion(promotionID: number): Observable<any>{
+    const url = this.BASE_URL +'promotiondel/'+promotionID;
     return this.http.delete<Product>(url, this.httpOptions);
   }
 
   //Promotions
-  getComments(productId: number): Observable<Review[]>{
+  getComments(productId: number): Observable<Comment[]>{
     const url = this.BASE_URL +'product/'+productId+"/comment/";
-    return this.http.get<Review[]>(url);
+    return this.http.get<Comment[]>(url);
+  }
+
+  //Comments
+  getAllComments(): Observable<Comment[]>{
+    const url = this.BASE_URL +'comments';
+    return this.http.get<Comment[]>(url);
+  }
+  createComment(comment: Comment): Observable<any>{
+    const url = this.BASE_URL +'commentcre';
+    return this.http.post(url, comment, this.httpOptions);
+  }
+
+  deleteComment(commentID: number): Observable<any>{
+    const url = this.BASE_URL +'commentdel/'+commentID;
+    return this.http.delete<Comment>(url, this.httpOptions);
   }
 
   addToCart(productId: number, quantityn: number): Observable<any>{

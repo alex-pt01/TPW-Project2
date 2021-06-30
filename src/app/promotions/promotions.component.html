@@ -1,0 +1,78 @@
+<div style="  margin:auto;
+          width:90%;
+          padding:10px;">
+
+
+
+  <div class="row "  >
+    <div class="col-sm-12"   >
+      <br>
+
+      <br>
+
+      <p></p>
+      <table class="styled-table" style="width: 1000px; height: 200px;  border: solid black 2px;">
+        <tr style="background-color: darkorange; color:white">
+          <th>Name</th>
+          <th>Discount</th>
+          <th>Description</th>
+
+          <th>Update</th>
+          <th>Remove</th>
+        </tr>
+
+        <tr *ngFor="let promotion of
+           promotions">
+          <th >{{ promotion.name }}</th>
+          <th >{{ promotion.discount }}</th>
+          <th >{{ promotion.description }}</th>
+
+          <th><a class="btn btn-sm btn-info" >Update</a></th>
+          <th><button type="button" class="btn btn-success" (click)="deleteProduct(promotion.id)">Delete
+          </button></th>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <br>
+  <div>
+    <div style="width:40%; margin-left: 5%; margin-right: 5%; ">
+
+      <div *ngIf="promotionForm " style="margin-right: 20%; margin-left: 20%" >
+        <form id="form-box"  method="post" (ngSubmit)="create()" [formGroup]="promotionForm"  >
+
+
+          <div class="form-header">Create Promotion</div>
+          <div>
+            <p *ngIf="promotionForm.controls['name'].invalid" style="color:red">Insert a name for the Promotion</p>
+            <input formControlName="name" type="text" class="form-input"/>
+            <br>
+            <p *ngIf="promotionForm.controls['discount'].invalid" style="color:red">Insert a Discount</p>
+            <input formControlName="discount" type="text" class="form-input"/>
+
+            <p *ngIf="promotionForm.controls['description'].invalid" style="color:red">Insert a Description</p>
+            <input formControlName="description" type="text" class="form-input"/>
+          </div>
+          <input type="submit"   class="btn btn-default check_out" value="Save"/>
+        </form>
+
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+
+<footer id="footer"><!--Footer-->
+
+  <div class="footer-bottom">
+    <div class="container">
+      <div class="row">
+        <p class="pull-left">Copyright © 2021 TechOn . All rights reserved.</p>
+        <p class="pull-right">TPW Project</p>
+      </div>
+    </div>
+  </div>
+
+</footer>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Product} from "../Models/Product";
-import {Review} from "../Models/Comment";
+import {Comment} from "../Models/Comment";
 import {DRFService} from "../Services/drf.service";
 import {ActivatedRoute, Params} from "@angular/router";
 import {identity} from "rxjs";
@@ -17,7 +17,7 @@ export class ProductDetailsComponent implements OnInit {
   avgRating: number = 0;
   id: string = '';
   sum: number = 0;
-  comments= Array<Review>();
+  comments= Array<Comment>();
   constructor(private route: ActivatedRoute, private service: DRFService ) {
 
   }
@@ -38,7 +38,7 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   getComments(id: string|null): void{
-    this.service.getComments(Number(id)).subscribe((c:Review[]) =>{
+    this.service.getComments(Number(id)).subscribe((c:Comment[]) =>{
       this.comments = c;
       this.comments.forEach((value) =>{
           this.sum += value.rating;
