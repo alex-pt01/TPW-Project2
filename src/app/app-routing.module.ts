@@ -12,6 +12,7 @@ import {CommentsComponent} from "./comments/comments.component";
 import {UsersComponent} from "./users/users.component";
 import {HomeComponent} from "./home/home.component";
 import {RegisterComponent} from "./register/register.component";
+import {SoldComponent} from "./sold/sold.component";
 
 
 
@@ -27,6 +28,7 @@ const routes: Routes = [
   {path: 'users', component: UsersComponent},
   {path: 'home', component: HomeComponent},
   {path: 'register', component: RegisterComponent},
+  {path: 'sold', component: SoldComponent},
 
 
 ];

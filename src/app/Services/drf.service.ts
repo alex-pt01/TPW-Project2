@@ -248,6 +248,13 @@ export class DRFService {
     return this.http.get<Payment[]>(url, this.httpOptions);
   }
 
+  getSoldHistory(username: string): Observable<Sold[]>{
+    this.getToken();
+
+    const url = this.BASE_URL +'sold/seller/'+username;
+    return this.http.get<Sold[]>(url, this.httpOptions);
+  }
+
   getShoppingCartItems(id: number): Observable<ShoppingCartItem[]>{
     this.getToken();
     const url = this.BASE_URL +'shoppingcarts/'+id+"/items/";

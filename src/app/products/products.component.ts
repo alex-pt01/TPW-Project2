@@ -24,7 +24,6 @@ export class ProductsComponent implements OnInit {
 
   constructor( private formbuilder: FormBuilder,
                private service: DRFService,
-               private router: Router
   ) {
   }
 
