@@ -11,8 +11,11 @@ import {PromotionsComponent} from "./promotions/promotions.component";
 import {CommentsComponent} from "./comments/comments.component";
 import {UsersComponent} from "./users/users.component";
 import {HomeComponent} from "./home/home.component";
+<<<<<<< HEAD
+=======
 import {RegisterComponent} from "./register/register.component";
 import {SoldComponent} from "./sold/sold.component";
+>>>>>>> 5b8087f4d93d1e49fdadb9ffa314e7f6bb6fc5f4
 
 
 
@@ -27,8 +30,11 @@ const routes: Routes = [
   {path: 'comments', component: CommentsComponent},
   {path: 'users', component: UsersComponent},
   {path: 'home', component: HomeComponent},
+<<<<<<< HEAD
+=======
   {path: 'register', component: RegisterComponent},
   {path: 'sold', component: SoldComponent},
+>>>>>>> 5b8087f4d93d1e49fdadb9ffa314e7f6bb6fc5f4
 
 
 ];
