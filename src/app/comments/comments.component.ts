@@ -16,9 +16,7 @@ export class CommentsComponent implements OnInit {
   comments = Array<Comment>();
   commentForm: FormGroup | null = null;
   user: User|null = null;
-  updateForm: FormGroup | null = null;
   PRODUCTS = Array<Product>();
-
 
   constructor(private formbuilder: FormBuilder,
               private service: DRFService,
@@ -43,14 +41,6 @@ export class CommentsComponent implements OnInit {
       this.service.getProducts().subscribe((products: Product[])=>{
       this.PRODUCTS = products;
       this.commentForm = new FormGroup({
-        userName: new FormControl('', [
-          Validators.required,
-          Validators.minLength(6),
-        ]),
-        userEmail: new FormControl('', [
-          Validators.required,
-          Validators.minLength(6),
-        ]),
         description: new FormControl('', [
           Validators.required,
           Validators.minLength(6),
@@ -59,10 +49,6 @@ export class CommentsComponent implements OnInit {
           Validators.required,
           Validators.min(1),
           Validators.max(5)]),
-        commentDate: new FormControl('', [
-          Validators.required,
-          Validators.minLength(6),
-        ]),
         product:new FormControl('', [
         ]),
       });
@@ -70,11 +56,26 @@ export class CommentsComponent implements OnInit {
     });
   }
 
+  create():void{
+    if(this.user && this.commentForm){
+      let c = new Comment(this.user.username, this.user.email, this.commentForm.controls['description'].value, this.commentForm.controls['rating'].value)
 
+
+      if(this.commentForm.controls['product'].value){
+        c.product=this.commentForm.controls['product'].value
+        alert(c.product?.name)
+      }
+
+      this.service.createComment(c).subscribe((_)=>{
+        alert("Comment Added")
+        window.location.reload()
+      })
+    }
+  }
 
   deleteComment(commentID: number | null): void {
-    confirm('Are You Sure Yow Want To Delete This Comment?')
-    if (commentID)
+
+    if (commentID && confirm('Are You Sure Yow Want To Delete This Comment?'))
       this.service.deleteComment(commentID).subscribe((_)=>{
         window.location.reload()
       })

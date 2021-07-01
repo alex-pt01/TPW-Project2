@@ -67,14 +67,6 @@ export class HomeComponent implements OnInit {
       this.service.getProducts().subscribe((products: Product[])=>{
         this.PRODUCTS = products;
         this.commentForm = new FormGroup({
-          userName: new FormControl('', [
-            Validators.required,
-            Validators.minLength(6),
-          ]),
-          userEmail: new FormControl('', [
-            Validators.required,
-            Validators.minLength(6),
-          ]),
           description: new FormControl('', [
             Validators.required,
             Validators.minLength(6),
@@ -83,12 +75,7 @@ export class HomeComponent implements OnInit {
             Validators.required,
             Validators.min(1),
             Validators.max(5)]),
-          commentDate: new FormControl('', [
-            Validators.required,
-            Validators.minLength(6),
-          ]),
-          product:new FormControl('', [
-          ]),
+
         });
       });
     });
@@ -97,11 +84,13 @@ export class HomeComponent implements OnInit {
   create(): void{
 
     if (this.commentForm && this.user ){
-      alert('----')
-      let c = new Comment(null, this.commentForm.controls['userName'].value, this.commentForm.controls['userEmail'].value, this.commentForm.controls['description'].value,this.commentForm.controls['rating'].value,this.commentForm.controls['product'].value,this.commentForm.controls['commentDate'].value)
+
+      let c = new Comment(this.user.username, this.user.email, this.commentForm.controls['description'].value,this.commentForm.controls['rating'].value)
+
       this.service.createComment(c).subscribe((_)=>{
-        alert('Comment Created')
-      });
+        alert("Comment Added")
+        window.location.reload()
+      })
     }
 
   }

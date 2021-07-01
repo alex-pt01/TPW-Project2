@@ -19,7 +19,6 @@
           <th style="font-size: 18px">Rating</th>
           <th style="font-size: 18px">commentDate</th>
           <th style="font-size: 18px">ProductName</th>
-          <th style="font-size: 18px">Update</th>
           <th style="font-size: 18px">Remove</th>
         </tr>
 
@@ -33,11 +32,43 @@
           <th *ngIf="comment.product">{{ comment.product.name }}</th>
           <th *ngIf="!comment.product">-------</th>
 
-          <th><a class="btn btn-sm btn-info" >Update</a></th>
+
           <th><button type="button" class="btn btn-success" (click)="deleteComment(comment.id)">Delete
           </button></th>
         </tr>
       </table>
+    </div>
+  </div>
+  <div>
+    <div style="margin: 0 auto; margin-bottom: 100px;  width:800px;  ">
+
+      <div *ngIf="commentForm "  >
+        <form id="form-box"  method="post" [formGroup]="commentForm"  >
+
+
+          <div class="form-header" style=" font-size: 20px">Create Promotion</div>
+          <br>
+          <div>
+
+            <p *ngIf="commentForm.controls['description'].invalid" style="color:red; font-size: 18px">Insert a Comment</p>
+            <input formControlName="description" type="text"   class="form-input"/>
+
+            <p *ngIf="commentForm.controls['rating'].invalid" style="color:red; font-size: 18px">Select a Rating</p>
+            <input formControlName="rating" type="number"  class="form-input"/>
+
+            <div class="form-header" style="font-size: 18px">Product</div>
+
+
+            <select  formControlName="product" style="width:30%; margin-right: 10px">
+              <option *ngFor="let c of PRODUCTS" [ngValue]="c">
+                {{c.name}}
+              </option>
+            </select>
+          </div>
+          <input style="font-size: 16px"type="submit"  (click)="create()" class="btn btn-default check_out" value="Create New"/>        </form>
+
+      </div>
+
     </div>
   </div>
   <br>

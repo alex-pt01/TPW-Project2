@@ -1,3 +1,4 @@
+<br>
 <div class = "card-wrapper">
   <div class = "card">
     <!-- card left -->
@@ -36,11 +37,13 @@
       </div>
 
       <div class = "purchase-info">
-        <input type = "number" min = "0" value = "1">
-        <button type = "button" class = "btn">
-          Add to Cart <i class = "fas fa-shopping-cart"></i>
-        </button>
-        <button type = "button" class = "btn">Compare</button>
+        <form (ngSubmit)="addToCart()">
+          <input [formControl]="quantity" type= "number" min = "0" value = "1">
+          <button type = "submit" class = "btn">
+            Add to Cart <i class = "fas fa-shopping-cart"></i>
+          </button>
+        </form>
+
       </div>
   </div>
     <div class="padding-right">
@@ -78,13 +81,23 @@
 </div><div class="col-md-4 col-md-offset-4">
     <div class="login-form"><!--login form-->
       <h2 class="title text-center" style="font-size:2rem">Write Your Review</h2>
-      <form  method="POST" action="" >
+      <form id="form-box" *ngIf="commentForm" method="post" [formGroup]="commentForm"  >
 
-        <button type="submit" class="btn btn-default pull-right">
-          Submit
-        </button>
 
+        <div class="form-header" style=" font-size: 20px">Create Promotion</div>
+        <br>
+        <div>
+
+          <p *ngIf="commentForm.controls['description'].invalid" style="color:red; font-size: 18px">Insert a Comment</p>
+          <input formControlName="description" type="text"   class="form-input"/>
+
+          <p *ngIf="commentForm.controls['rating'].invalid" style="color:red; font-size: 18px">Select a Rating</p>
+          <input formControlName="rating" type="number"  class="form-input"/>
+
+        </div>
+        <input style="font-size: 16px"type="submit"  (click)="create()" class="btn btn-default check_out" value="Create New"/>
       </form>
+
     </div>
   </div>
   </div></div>

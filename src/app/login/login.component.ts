@@ -6,6 +6,7 @@ import {User} from "../Models/User";
 import {Router, RouterModule} from "@angular/router";
 import {HttpHeaders} from "@angular/common/http";
 import {AppComponent} from "../app.component";
+import {stringify} from "@angular/compiler/src/util";
 
 @Component({
   selector: 'app-login',
@@ -39,8 +40,8 @@ export class LoginComponent implements OnInit {
       this.drf.login(this.loginForm.controls['username'].value, this.loginForm.controls['password'].value).subscribe((u: User)=> {
         this.drf.user = u;
         localStorage.setItem('TOKEN', u.token)
-
-
+        if (u.is_superuser)
+          AppComponent.isUserAdmin(true)
         this.router.navigate(['/home']);
 
       });

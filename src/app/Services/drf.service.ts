@@ -130,6 +130,7 @@ export class DRFService {
   }
 
   deleteProduct(productId: number): Observable<any>{
+    this.getToken()
     const url = this.BASE_URL +'productdel/'+productId;
     return this.http.delete<Product>(url, this.httpOptions);
   }
@@ -199,16 +200,28 @@ export class DRFService {
 
   createComment(comment: Comment): Observable<any>{
     const url = this.BASE_URL +'commentcre';
-    let f = {
-      userName: comment.userName,
-      userEmail: comment.userEmail,
-      description: comment.description,
-      rating: comment.rating,
-      commentDate: comment.commentDate,
-      product: comment.product
-
+    let f ={}
+    let date = comment.commentDate.getFullYear()+'-'+(comment.commentDate.getMonth()+1)+'-'+comment.commentDate.getDate();
+    if (comment.product){
+      f = {
+        userName: comment.userName,
+        userEmail: comment.userEmail,
+        description: comment.description,
+        rating: comment.rating,
+        commentDate: date,
+        product: comment.product.id
+      }
     }
-    alert(JSON.stringify(f))
+    else {
+      f = {
+        userName: comment.userName,
+        userEmail: comment.userEmail,
+        description: comment.description,
+        rating: comment.rating,
+        commentDate: date
+      }
+    }
+
     return this.http.post(url, f, this.httpOptions);
   }
 

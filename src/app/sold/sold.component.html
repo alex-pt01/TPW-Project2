@@ -36,7 +36,8 @@
           <th >{{ sold.buyer}}</th>
           <th *ngIf="sold.promotion">{{ sold.promotion.name }}</th>
           <th *ngIf="!sold.promotion">-------</th>
-          <th>{{ sold.total }}</th>
+          <th *ngIf="sold.promotion">{{ sold.product.price*sold.quantity - sold.product.price*sold.quantity*sold.promotion.discount }}</th>
+          <th *ngIf="!sold.promotion">{{ sold.product.price*sold.quantity }}</th>
 
         </tr>
       </table>

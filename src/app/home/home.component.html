@@ -1,13 +1,13 @@
-<div>
+<div style="width:80%; margin-left:10%; margin-right:10%">
   <img src="assets/images/drone.jpg" >
 
 </div>
 
-<div style="margin-left:100px" class="features_items">
+<div style="width:80%; margin-left:10%; margin-right:10%" class="features_items">
   <br><br>
   <h2 style="font-size: 20px;" class="title text-center">Popular products </h2>
-  <div  class="container"  *ngFor="let product of allProducts" >
-    <div class="card">
+  <div  style="" class="container"  *ngFor="let product of allProducts" >
+    <div class="card" >
       <a routerLink="/details/{{product.id}}">
         <div class="imgBx">
           <img src="{{ product.image }}">
@@ -37,35 +37,39 @@
 
     <div class="col-sm-12"   >
 
-
-      <p></p>
-      <table class="styled-table" style="margin: 0 auto; width: 1000px; height: 400px;  border: solid black 2px;">
-        <tr style="background-color: steelblue; color:white">
-          <th style="font-size: 16px">UserName</th>
-          <th style="font-size: 16px">Email</th>
-          <th style="font-size: 16px">Description</th>
-          <th style="font-size: 16px">Rating</th>
-          <th style="font-size: 16px">commentDate</th>
-          <th style="font-size: 16px">ProductName</th>
-
-        </tr>
-
-        <tr *ngFor="let comment of
-           comments">
-          <th >{{ comment.userName }}</th>
-          <th >{{ comment.userEmail }}</th>
-          <th >{{ comment.description }}</th>
-          <th >{{ comment.rating }}</th>
-          <th >{{ comment.commentDate }}</th>
-          <th *ngIf="comment.product">{{ comment.product.name }}</th>
-          <th *ngIf="!comment.product">-------</th>
+      <div  *ngFor="let c of comments">
+        <div class=" ">
+          <div class="">
+            <div class="" style="border: #2a6496; border-style: solid; width:30%; margin:15px; float:left">
+              <h1 style="color:orange">{{ c.userName }} </h1>
+              <p>{{ c.commentDate }}</p>
+              <label><b>Description: </b></label>
+              <a>{{ c.description }}</a>
 
 
-        </tr>
-      </table>
+
+              <h3 *ngFor="let a of c.stars" >
+                <i *ngIf="a==1" class = "fas fa-star"></i>
+                <i *ngIf="a==0" class = "fas fa-star-half-alt"></i>
+              </h3>
+
+
+              <h3>
+
+              </h3>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    <br>
+
     </div>
   </div>
+  <div style="clear:both;"></div>
+  <p></p>
   <br><br><br>
+  <hr>
   <h2 style="font-size: 20px;" class="title text-center">Add Comment </h2>
 
   <div style="margin: 0 auto;width: 800px; height: 400px; margin-bottom: 500px ">
@@ -76,11 +80,7 @@
 
         <h2 class="form-header" style="font-size: 20px">Create Comment</h2>
         <div>
-          <p *ngIf="commentForm.controls['userName'].invalid" style="color:red; font-size: 18px">Insert your name</p>
-          <input formControlName="userName" type="text" class="form-input"/>
-          <br>
-          <p *ngIf="commentForm.controls['userEmail'].invalid" style="color:red; font-size: 18px">Insert your email</p>
-          <input formControlName="userEmail" type="text" class="form-input"/>
+
           <br>
           <p *ngIf="commentForm.controls['description'].invalid" style="color:red; font-size: 18px">Insert a Description</p>
           <input formControlName="description" type="text" class="form-input"/>
@@ -88,20 +88,6 @@
           <p *ngIf="commentForm.controls['rating'].invalid" style="color:red; font-size: 18px">Insert a product rating</p>
           <input formControlName="rating" type="number" class="form-input"/>
           <br>
-          <p *ngIf="commentForm.controls['commentDate'].invalid" style="color:red; font-size: 18px">Insert a comment date</p>
-          <input formControlName="commentDate" type="date" class="form-input"/>
-          <br>
-          <div style="font-size: 18px" class="form-header">Product</div>
-
-
-          <select formControlName="product" style="width:30%; margin-right: 10px">
-            <option>-------</option>
-            <option *ngFor="let p of PRODUCTS">
-              {{p.name}}
-            </option>
-          </select>
-
-
 
         </div>
         <input style="float: right; font-size: 16px" type="submit"   class="btn btn-default check_out" value="Save"/>

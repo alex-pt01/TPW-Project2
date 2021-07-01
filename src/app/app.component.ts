@@ -10,14 +10,18 @@ import {User} from "./Models/User";
 export class AppComponent{
   title = 'TPW-Project2';
   user: User|null=null;
+  private static isAdmin: boolean;
 
   constructor(public drfService: DRFService) {
 
   }
   logout(): void{
     localStorage.clear();
-    this.drfService.user=null;
+    AppComponent.isAdmin = false;
   }
+
+
+
   public slides = [
     { src: "https://image1.com" },
     { src: "https://image2.com" },
@@ -25,4 +29,11 @@ export class AppComponent{
     { src: "https://image4.com" }
   ];
 
+  static isUserAdmin(value: boolean) {
+    AppComponent.isAdmin= value;
+  }
+
+  isUserAdmin() {
+    return AppComponent.isAdmin
+  }
 }
