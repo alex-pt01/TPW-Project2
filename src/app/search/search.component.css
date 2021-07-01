@@ -79,3 +79,168 @@ body{
   transform: translate(-50%, -50%) rotate(0deg);
   width: 270px;
 }
+.container .card .contentBx{
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 100px;
+  text-align: center;
+  transition: 1s;
+  z-index: 10;
+}
+
+.container .card:hover .contentBx{
+  height: 210px;
+}
+.add-to-cart:hover{
+  color:orange;
+}
+
+.container .card .contentBx h2{
+  position: relative;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: #fff;
+  margin: 0;
+}
+
+.container .card .contentBx .size, .container .card .contentBx .color {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 20px;
+  transition: 0.5s;opacity: 0;
+  visibility: hidden;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.container .card:hover .contentBx .size{
+  opacity: 1;
+  visibility: visible;
+  transition-delay: 0.5s;
+}
+
+.container .card:hover .contentBx .color{
+  opacity: 1;
+  visibility: visible;
+  transition-delay: 0.6s;
+}
+
+.container .card .contentBx .size h3, .container .card .contentBx .color h3{
+  color: #fff;
+  font-weight: 300;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-right: 10px;
+}
+
+.container .card .contentBx .size span{
+  width: 26px;
+  height: 26px;
+  text-align: center;
+  line-height: 26px;
+  font-size: 14px;
+  display: inline-block;
+  color: #111;
+  background: #fff;
+  margin: 0 5px;
+  transition: 0.5s;
+  color: #111;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.container .card .contentBx .size span:hover{
+  background: white;
+}
+
+.container .card .contentBx .color span{
+  width: 20px;
+  height: 20px;
+  background: #ff0;
+  border-radius: 50%;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+
+
+.container .card .contentBx a{
+  display: inline-block;
+  padding: 10px 20px;
+  background: #fff;
+  border-radius: 4px;
+  margin-top: 5px;
+  text-decoration: none;
+  font-weight: 600;
+  color: #111;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: 0.5s;
+  margin-top: 0;
+}
+
+.container .card:hover .contentBx a{
+  opacity: 1;
+  transform: translateY(0px);
+  transition-delay: 0.75s;
+
+}
+
+
+
+/* Reset Select */
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  outline: 0;
+  box-shadow: none;
+  border: 0 !important;
+  background: #2c3e50;
+  background-image: none;
+}
+/* Remove IE arrow */
+select::-ms-expand {
+  display: none;
+}
+/* Custom Select */
+.select {
+  position: relative;
+  display: flex;
+  width: 20em;
+  height: 3em;
+  line-height: 3;
+  background: #2c3e50;
+  overflow: hidden;
+  border-radius: .25em;
+  font-size: 1rem;
+}
+select {
+  flex: 1;
+  padding: 0 .5em;
+  color: #fff;
+  cursor: pointer;
+}
+/* Arrow */
+.select::after {
+  content: '\25BC';
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0 1em;
+  background: #34495e;
+  cursor: pointer;
+  pointer-events: none;
+  -webkit-transition: .25s all ease;
+  -o-transition: .25s all ease;
+  transition: .25s all ease;
+}
+/* Transition */
+.select:hover::after {
+  color: #f39c12;
+}
+

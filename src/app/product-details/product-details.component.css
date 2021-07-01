@@ -123,4 +123,93 @@ body{
 }
 
 
+@media screen and (min-width: 992px){
+  .card{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 1.5rem;
+  }
+  .card-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .product-imgs{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .product-content{
+    padding-top: 0;
+  }
+}
+.styled-table {
+  border-collapse: collapse;
+  width:76%;
+  margin-left:12%;
+  margin-right:12%;
+  font-size: 0.9em;
+  font-family: sans-serif;
+  min-width: 400px;
+}
+.styled-table thead tr {
+  background-color: #009879;
+  color: #009879;
+  text-align: left;
+}
+
+.styled-table th,
+.styled-table td {
+  padding: 30px 15px;
+}
+
+th{
+  border: solid grey 2px;
+}
+
+.total_area span {
+  float: right;
+}
+
+.total_area ul li {
+  background: #E6E4DF;
+  color: #696763;
+  margin-top: 10px;
+  padding: 7px 20px;
+}
+
+
+
+#form-box {
+  height: content;
+  padding: 2em 3.5em;
+  border-top: 50px solid #e8e8e8;
+  border-left: 2px solid #e8e8e8;
+  border-right: 2px solid #e8e8e8;
+  border-bottom: 2px solid #e8e8e8;
+}
+
+#form-title {
+  font-size: 1.6em;
+  padding-bottom: 6px;
+  margin-bottom: 25px;
+  border-bottom: 1.5px solid #e8e8e8;
+}
+
+.form-header {
+  font-size: 16px;
+  margin-bottom: 2px;
+}
+
+.form-input {
+  width: 70%;
+  height: 30px;
+  font-size: 16px;
+  padding-left: 6px;
+}
+
+.form-input:not(:last-child) {
+  margin-bottom: 15px;
+}
+
 
