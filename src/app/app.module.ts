@@ -26,7 +26,6 @@ import { UsersComponent } from './users/users.component';
 import { HomeComponent } from './home/home.component';
 import {NgbCarouselModule} from "@ng-bootstrap/ng-bootstrap";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SoldComponent } from './sold/sold.component';
 import { RegisterComponent } from './register/register.component';
 
@@ -58,7 +57,6 @@ import { RegisterComponent } from './register/register.component';
     MatCheckboxModule,
     FormsModule,
     NgbCarouselModule,
-    FontAwesomeModule,
 
   ],
   providers: [DRFService],

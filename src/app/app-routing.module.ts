@@ -28,6 +28,7 @@ const routes: Routes = [
   {path: 'comments', component: CommentsComponent},
   {path: 'users', component: UsersComponent},
   {path: 'home', component: HomeComponent},
+  {path: '', component: HomeComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'sold', component: SoldComponent},
 
