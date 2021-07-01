@@ -26,7 +26,6 @@ export class CartComponent implements OnInit {
   ngOnInit(): void {
     this.createForm()
     this.getCart()
-    this.getTotal();
 
   }
   createForm(): void{
@@ -37,46 +36,51 @@ export class CartComponent implements OnInit {
       if (localStorage.getItem('CARD_NO')){
         this.cardNo = localStorage.getItem('CARD_NO')
       }
-      this.checkoutForm = new FormGroup({
-        cardno: new FormControl('', [
-          Validators.required,
-          Validators.minLength(16),
-          Validators.maxLength(16),
-          Validators.min(0)
-        ]),
-        type: new FormControl('', [
-          Validators.required,
-        ]),
-        code: new FormControl('',[
-          Validators.required,
-          Validators.minLength(3),
-          Validators.maxLength(3),
-          Validators.min(0)
-        ] ),
-        year: new FormControl('',
-          [
+      this.service.getCartTotal().subscribe((total:number)=>{
+        this.total=total
+        this.checkoutForm = new FormGroup({
+          cardno: new FormControl('', [
             Validators.required,
-            Validators.minLength(4),
-            Validators.maxLength(4),
-            Validators.min(1900),
-
+            Validators.minLength(16),
+            Validators.maxLength(16),
+            Validators.min(0)
           ]),
-        month: new FormControl('', [
-          Validators.required,
-          Validators.min(1),
-          Validators.max(12)
-        ]),
-        address: new FormControl('',
-          [
+          type: new FormControl('', [
             Validators.required,
           ]),
-        credits: new FormControl('', [
-          Validators.required,
-          Validators.min(0),
-          Validators.max(creds)
-        ]),
+          code: new FormControl('',[
+            Validators.required,
+            Validators.minLength(3),
+            Validators.maxLength(3),
+            Validators.min(0)
+          ] ),
+          year: new FormControl('',
+            [
+              Validators.required,
+              Validators.minLength(4),
+              Validators.maxLength(4),
+              Validators.min(1900),
 
-      });
+            ]),
+          month: new FormControl('', [
+            Validators.required,
+            Validators.min(1),
+            Validators.max(12)
+          ]),
+          address: new FormControl('',
+            [
+              Validators.required,
+            ]),
+          credits: new FormControl('', [
+            Validators.required,
+            Validators.min(0),
+            Validators.max(creds),
+            Validators.max(this.total)
+          ]),
+
+        });
+
+      })
 
     });
 
