@@ -7,6 +7,7 @@ import {identity} from "rxjs";
 import {HttpParams} from "@angular/common/http";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {User} from "../Models/User";
+import {AppComponent} from "../app.component";
 
 
 @Component({
@@ -47,7 +48,8 @@ export class ProductDetailsComponent implements OnInit {
   createForm(): void{
     this.service.profile().subscribe((pr: User)=> {
       this.user=pr;
-
+      if (pr.is_superuser)
+        AppComponent.isUserAdmin(true)
       this.commentForm = new FormGroup({
         description: new FormControl('', [
           Validators.required,

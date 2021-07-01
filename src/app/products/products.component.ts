@@ -97,10 +97,7 @@ export class ProductsComponent implements OnInit {
   }
 
   update():void{
-
-
     if (this.productForm  && this.selectedFile && this.currentProduct && this.service.user){
-      alert(this.currentProduct.id)
       let p = new Product(this.currentProduct.id, this.productForm.controls['name'].value,this.productForm.controls['price'].value,
         this.productForm.controls['description'].value, this.selectedFile,this.productForm.controls['quantity'].value,this.productForm.controls['brand'].value,
         this.service.user.username, this.productForm.controls['category'].value, this.productForm.controls['condition'].value,

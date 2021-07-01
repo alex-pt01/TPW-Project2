@@ -6,6 +6,7 @@ import {DRFService} from "../Services/drf.service";
 import {User} from "../Models/User";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Comment} from "../Models/Comment";
+import {AppComponent} from "../app.component";
 
 @Component({
   selector: 'app-home',
@@ -64,6 +65,8 @@ export class HomeComponent implements OnInit {
   createForm(): void{
     this.service.profile().subscribe((pr: User)=> {
       this.user=pr;
+      if (pr.is_superuser)
+        AppComponent.isUserAdmin(true)
       this.service.getProducts().subscribe((products: Product[])=>{
         this.PRODUCTS = products;
         this.commentForm = new FormGroup({

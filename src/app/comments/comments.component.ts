@@ -6,6 +6,7 @@ import {Router} from "@angular/router";
 import {Comment} from "../Models/Comment";
 import {Promotion} from "../Models/Promotion";
 import {Product} from "../Models/Product";
+import {AppComponent} from "../app.component";
 
 @Component({
   selector: 'app-comments',
@@ -38,6 +39,8 @@ export class CommentsComponent implements OnInit {
   createForm(): void{
     this.service.profile().subscribe((pr: User)=> {
       this.user=pr;
+      if (pr.is_superuser)
+        AppComponent.isUserAdmin(true)
       this.service.getProducts().subscribe((products: Product[])=>{
       this.PRODUCTS = products;
       this.commentForm = new FormGroup({
