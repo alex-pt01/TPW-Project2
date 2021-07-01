@@ -20,7 +20,7 @@ export class ProductsComponent implements OnInit {
   PROMOTIONS = Array<Promotion>();
   currentProduct: Product |null = null;
   selectedFile: string | ArrayBuffer | null = null;
-
+  user: User | null = null;
 
   constructor( private formbuilder: FormBuilder,
                private service: DRFService,
@@ -37,21 +37,25 @@ export class ProductsComponent implements OnInit {
   getProducts(): void{
     this.service.getProducts().subscribe((pr: Product[])=>
     {
+      this.service.profile().subscribe((user:User)=>{
+        this.user=user;
+        this.createForm()
+        if (this.user && !this.user.is_superuser){
+          for(let p of pr){
+            if(p.seller==this.user.username)
+              this.products.push(p)
+          }
+        }
+        else
+          this.products = pr;
+      })
+      });
 
-    this.createForm()
-    if (this.service.user && !this.service.user.is_superuser){
-      for(let p of pr){
-        if(p.seller==this.service.user.username)
-          this.products.push(p)
-      }
-    }
-    else
-      this.products = pr;
-  })
   }
 
   createForm(): void{
-
+    this.service.profile().subscribe((user:User)=>{
+      this.user=user;
       this.service.getPromotions().subscribe((promos: Promotion[])=>{
         this.PROMOTIONS = promos;
         this.productForm = new FormGroup({
@@ -89,29 +93,35 @@ export class ProductsComponent implements OnInit {
 
 
 
+  })
   }
-
 
   createUpdateForm(product: Product): void{
       this.currentProduct = product;
   }
 
   update():void{
-    if (this.productForm  && this.selectedFile && this.currentProduct && this.service.user){
-      let p = new Product(this.currentProduct.id, this.productForm.controls['name'].value,this.productForm.controls['price'].value,
-        this.productForm.controls['description'].value, this.selectedFile,this.productForm.controls['quantity'].value,this.productForm.controls['brand'].value,
-        this.service.user.username, this.productForm.controls['category'].value, this.productForm.controls['condition'].value,
-      )
-      if(this.productForm.controls['promotion'].value){
-        p.promotion=this.productForm.controls['promotion'].value
 
+      if (this.productForm  && this.selectedFile && this.currentProduct && this.user){
+
+        let p = new Product(this.currentProduct.id, this.productForm.controls['name'].value,this.productForm.controls['price'].value,
+          this.productForm.controls['description'].value, this.selectedFile,this.productForm.controls['quantity'].value,this.productForm.controls['brand'].value,
+          this.currentProduct.seller, this.productForm.controls['category'].value, this.productForm.controls['condition'].value,
+        )
+        p.date = this.currentProduct.date
+        if(this.productForm.controls['promotion'].value){
+          p.promotion=this.productForm.controls['promotion'].value
+
+        }
+
+
+        this.service.updateProduct(p).subscribe((_)=>{
+          alert('Product Updated')
+          window.location.reload()
+        });
       }
 
 
-      this.service.updateProduct(p).subscribe((_)=>{
-        alert('Product Updated')
-      });
-    }
   }
 
   onFileChanged(event: any): void{
@@ -132,20 +142,22 @@ export class ProductsComponent implements OnInit {
   }
 
   create(): void{
-    if (this.productForm && this.service.user && this.selectedFile){
-
+    if (this.productForm && this.user && this.selectedFile){
+      let username = this.user.username
+      if (this.user.is_superuser)
+        username = 'TechOn'
       let p = new Product(null, this.productForm.controls['name'].value,this.productForm.controls['price'].value,
         this.productForm.controls['description'].value, this.selectedFile,this.productForm.controls['quantity'].value,this.productForm.controls['brand'].value,
-        this.service.user.username, this.productForm.controls['category'].value, this.productForm.controls['condition'].value,
+        username, this.productForm.controls['category'].value, this.productForm.controls['condition'].value,
         )
       if(this.productForm.controls['promotion'].value){
         p.promotion=this.productForm.controls['promotion'].value
-        alert(p.promotion.name)
       }
 
 
       this.service.createProduct(p).subscribe((_)=>{
         alert('Product Created')
+        window.location.reload()
       });
     }
 

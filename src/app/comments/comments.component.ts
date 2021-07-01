@@ -66,7 +66,7 @@ export class CommentsComponent implements OnInit {
 
       if(this.commentForm.controls['product'].value){
         c.product=this.commentForm.controls['product'].value
-        alert(c.product?.name)
+  
       }
 
       this.service.createComment(c).subscribe((_)=>{

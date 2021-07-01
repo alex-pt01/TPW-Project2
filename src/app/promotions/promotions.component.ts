@@ -60,7 +60,6 @@ export class PromotionsComponent implements OnInit {
   create(): void{
 
     if (this.promotionForm && this.user ){
-      alert('----')
       let p = new Promotion(null, this.promotionForm.controls['name'].value, this.promotionForm.controls['discount'].value, this.promotionForm.controls['description'].value, this.promotionForm.controls['deadline'].value)
       this.service.createPromotion(p).subscribe((_)=>{
         alert('Promotion Created')
@@ -88,7 +87,6 @@ export class PromotionsComponent implements OnInit {
 
 
     if (this.promotionForm && this.user && this.currentPromotion){
-      alert(this.currentPromotion.id)
       let p = new Promotion(this.currentPromotion.id, this.promotionForm.controls['name'].value, this.promotionForm.controls['discount'].value, this.promotionForm.controls['description'].value)
 
       this.service.updatePromotion(p).subscribe((_)=>{

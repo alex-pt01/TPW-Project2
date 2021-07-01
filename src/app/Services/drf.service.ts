@@ -104,8 +104,9 @@ export class DRFService {
   }
 
   updateProduct(product: Product): Observable<any>{
+    this.getToken()
     const url = this.BASE_URL +'productup/'+product.id;
-    alert(url)
+
 
     let f  = {
       id:product.id,
@@ -119,12 +120,9 @@ export class DRFService {
       stock: product.stock,
       quantity: product.quantity,
       promotion: product.promotion.id,
-      image: product.image
+      image: product.image,
+      date:product.date
     }
-
-
-
-
 
     return this.http.put(url, f, this.httpOptions);
   }
@@ -163,7 +161,7 @@ export class DRFService {
       description: promotion.description,
       deadline: promotion.deadline
     }
-    alert(JSON.stringify(f))
+
     return this.http.post(url, f, this.httpOptions);
   }
   updatePromotion(promotion: Promotion): Observable<any>{
@@ -272,7 +270,6 @@ export class DRFService {
     this.getToken();
     const url = this.BASE_URL +'pay';
     let body= {address: a, total:t, credits:u, cardNo:c, typeOfCard:type}
-    alert(JSON.stringify(body))
     return this.http.post(url, body, this.httpOptions);
   }
   getShoppingCarts(username: string): Observable<Payment[]>{
