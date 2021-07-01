@@ -103,8 +103,8 @@
 
 
     <div class="form-header">Credis</div>
-    <p *ngIf="checkoutForm.controls['credits'].invalid" style="color:red">Invalid Month, must be less than {{credits}}</p>
-    <input formControlName="credits" type="number" placeholder="Max = {{credits}}" class="form-input" id="city" />
+    <p *ngIf="checkoutForm.controls['credits'].invalid" style="color:red">Invalid Credits, must be less than {{credits}} and {{total}}</p>
+    <input formControlName="credits" type="number" class="form-input" />
 
     <div class="form-header">Address</div>
     <input formControlName="address" class="form-input" id="region" />
